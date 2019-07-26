@@ -30,6 +30,8 @@ const windowOptions: WindowOption = {
 
 @injectable()
 export class NotificationCenter extends AsyncInit {
+    private static WIDTH: number = 388;
+
     @inject(Inject.STORE)
     private _store!: Store;
 
@@ -99,6 +101,7 @@ export class NotificationCenter extends AsyncInit {
      */
     public async showWindow(): Promise<void> {
         const {window} = this._webWindow;
+        await window.updateOptions({opacity: 1});
         await window.show();
         await this.animateIn();
         await window.setAsForeground();
@@ -150,8 +153,16 @@ export class NotificationCenter extends AsyncInit {
 
         window.animate(
             {
-                opacity: {
-                    opacity: 1,
+                size: {
+                    width: NotificationCenter.WIDTH,
+                    height: 0,
+                    relative: true,
+                    duration
+                },
+                position: {
+                    top: 0,
+                    left: -NotificationCenter.WIDTH,
+                    relative: true,
                     duration
                 }
             },
@@ -171,8 +182,15 @@ export class NotificationCenter extends AsyncInit {
 
         window.animate(
             {
-                opacity: {
-                    opacity: 0,
+                size: {
+                    width: -NotificationCenter.WIDTH,
+                    height: 0,
+                    relative: true,
+                    duration
+                }, position: {
+                    top: 0,
+                    left: NotificationCenter.WIDTH,
+                    relative: true,
                     duration
                 }
             },
