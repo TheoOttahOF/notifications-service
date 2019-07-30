@@ -1,23 +1,28 @@
 import * as React from 'react';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
 
 import {NotificationCard} from '../NotificationCard/NotificationCard';
 import {StoredNotification} from '../../../model/StoredNotification';
 import {CloseButton} from '../CloseButton/CloseButton';
-import {Actionable} from '../../containers/NotificationCenterApp';
-import {Action} from '../../../store/Actions';
+import {Action, RootAction} from '../../../store/Actions';
 
-export interface NotificationGroupProps extends Actionable {
+interface ComponentProps {
     // Group name
     name: string;
     // Notifications in this group
     notifications: StoredNotification[];
 }
 
-export function NotificationGroup(props: NotificationGroupProps) {
-    const {notifications, dispatch} = props;
+type Props = ComponentProps & ReturnType<typeof mapDispatch>;
+
+function Component(props: Props) {
+    const {notifications, clearAllNotifications} = props;
+
     const handleClearAll = () => {
-        dispatch({type: Action.REMOVE, notifications});
+        clearAllNotifications();
     };
+
     return (
         <div className="group">
             <div className="header">
@@ -31,7 +36,7 @@ export function NotificationGroup(props: NotificationGroupProps) {
                     notifications.map((notification, i) => {
                         return (
                             <li key={i + notification.id}>
-                                <NotificationCard notification={notification} dispatch={dispatch} />
+                                <NotificationCard notification={notification} />
                             </li>
                         );
                     })
@@ -40,3 +45,12 @@ export function NotificationGroup(props: NotificationGroupProps) {
         </div>
     );
 }
+
+const mapDispatch = (dispatch: Dispatch<RootAction>, ownProps: ComponentProps) => ({
+    clearAllNotifications: () => {
+        dispatch({type: Action.REMOVE, notifications: ownProps.notifications});
+    }
+});
+
+export const NotificationGroup = connect(null, mapDispatch)(Component);
+
