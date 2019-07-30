@@ -12,11 +12,11 @@ export interface NotificationButtonProps {
 export function Button(props: NotificationButtonProps) {
     const {onClick, text, icon, buttonIndex} = props;
 
-    function handleButtonClick(event: React.MouseEvent<HTMLElement>) {
+    const handleButtonClick = (event: React.MouseEvent<HTMLElement>) => {
         event.stopPropagation();
         event.preventDefault();
         onClick(buttonIndex);
-    }
+    };
 
     return (
         <div className="button" onClick={handleButtonClick}>
