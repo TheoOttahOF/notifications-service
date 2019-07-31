@@ -122,9 +122,9 @@ export class ToastManager {
             previousToastRect = await toast.calculateBounds(toast.position);
             if (toast.canFitInMonitor()) {
                 if (toast.isShowing) {
-                    toast.moveTo(toast.position);
+                    await toast.moveTo(toast.position);
                 } else {
-                    toast.show();
+                    await toast.show();
                 }
             }
         }
@@ -157,7 +157,7 @@ export class ToastManager {
         const toastWasShowing = toast.isShowing;
         await toast.close(force);
         if (toastWasShowing) {
-            this.updateToasts(index);
+            await this.updateToasts(index);
         }
     }
 

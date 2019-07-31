@@ -57,7 +57,7 @@ export class Main {
             [APITopic.TOGGLE_NOTIFICATION_CENTER]: this.toggleNotificationCenter.bind(this)
         });
 
-        this._store.onAction.add((action: RootAction) => {
+        this._store.onAction.add(async (action: RootAction) => {
             if (action.type === Action.REMOVE) {
                 // Send notification closed event to uuid with the context.
                 action.notifications.forEach((notification: StoredNotification) => {

@@ -1,7 +1,7 @@
 import {injectable, inject} from 'inversify';
 import {composeWithDevTools} from 'remote-redux-devtools';
-import {Store as ReduxStore, applyMiddleware, createStore, StoreEnhancer, Dispatch, Unsubscribe} from 'redux';
-import {Signal} from 'openfin-service-signal';
+import {Store as ReduxStore, applyMiddleware, createStore, StoreEnhancer, Dispatch, Unsubscribe, MiddlewareAPI} from 'redux';
+import {Signal, Aggregators} from 'openfin-service-signal';
 
 import {Inject} from '../common/Injectables';
 import {notificationStorage, settingsStorage} from '../model/Storage';
@@ -19,7 +19,7 @@ export class Store {
         windowVisible: false
     };
 
-    public readonly onAction: Signal<[RootAction]> = new Signal();
+    public readonly onAction: Signal<[RootAction], Promise<void>, Promise<void>> = new Signal(Aggregators.AWAIT_VOID);
 
     private _actionMap: ActionMap;
     private _store: ReduxStore<RootState, RootAction>;
@@ -33,8 +33,8 @@ export class Store {
         return this._store.getState() as Immutable<RootState>;
     }
 
-    public dispatch(action: RootAction): void {
-        this._store.dispatch(action);
+    public async dispatch(action: RootAction): Promise<RootAction> {
+        return this._store.dispatch(action);
     }
 
     public watchForChange<T>(getObject: (state: RootState) => T, observer: StoreChangeObserver<T>): Unsubscribe {
@@ -68,7 +68,7 @@ export class Store {
     }
 
     private createEnhancer(): StoreEnhancer {
-        let enhancer: StoreEnhancer = applyMiddleware(this.createMiddleware.bind(this));
+        let enhancer: StoreEnhancer = applyMiddleware(this.createMiddleware().bind(this));
 
         if (process.env.NODE_ENV !== 'production') {
             const devTools = composeWithDevTools({
@@ -81,10 +81,9 @@ export class Store {
         return enhancer;
     }
 
-    private createMiddleware(): (next: Dispatch<RootAction>) => (action: any) => any {
-        return (next: Dispatch<RootAction>) => async (action: RootAction) => {
+    private createMiddleware() {
+        return (api: MiddlewareAPI<Dispatch<RootAction>, RootState>) => (next: Dispatch<RootAction>) => async (action: RootAction) => {
             await this.onAction.emit(action);
-
             return next(action);
         };
     }
