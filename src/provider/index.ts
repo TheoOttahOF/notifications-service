@@ -95,7 +95,10 @@ export class Main {
     private async createNotification(payload: NotificationOptions, sender: ProviderIdentity): Promise<Notification> {
         // Explicity create the identity object to avoid storing other unneeded info from ProviderIdentity
         const notification = this.hydrateNotification(payload, {uuid: sender.uuid, name: sender.name});
-        this._store.dispatch({type: Action.CREATE, notification});
+        if (this._store.state.notifications.some(x => x.id === notification.id)) {
+            await this._store.dispatch({type: Action.REMOVE, notifications: [notification]});
+        }
+        await this._store.dispatch({type: Action.CREATE, notification});
         return notification.notification;
     }
 

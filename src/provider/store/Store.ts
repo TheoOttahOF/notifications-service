@@ -82,8 +82,8 @@ export class Store {
     }
 
     private createMiddleware(): (next: Dispatch<RootAction>) => (action: any) => any {
-        return (next: Dispatch<RootAction>) => (action: RootAction) => {
-            this.onAction.emit(action);
+        return (next: Dispatch<RootAction>) => async (action: RootAction) => {
+            await this.onAction.emit(action);
 
             return next(action);
         };

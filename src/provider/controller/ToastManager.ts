@@ -91,17 +91,17 @@ export class ToastManager {
         });
     }
 
-    private onAction(action: RootAction): void {
+    private async onAction(action: RootAction): Promise<void> {
         if (action.type === Action.CREATE) {
-            this.create(action.notification);
+            await this.create(action.notification);
         }
 
         if (action.type === Action.REMOVE) {
-            this.removeToasts(...action.notifications);
+            await this.removeToasts(...action.notifications);
         }
 
         if (action.type === Action.TOGGLE_VISIBILITY) {
-            this.closeAll();
+            await this.closeAll();
         }
     }
 
