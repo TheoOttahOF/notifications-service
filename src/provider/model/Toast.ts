@@ -5,7 +5,7 @@ import {PointTopLeft} from 'openfin/_v2/api/system/point';
 import Bounds from 'openfin/_v2/api/window/bounds';
 import {Rect} from 'openfin/_v2/api/system/monitor';
 
-import {deferredPromise} from '../common/deferredPromise';
+import {DeferredPromise} from '../common/DeferredPromise';
 import {renderApp} from '../view/containers/ToastApp';
 import {Store} from '../store/Store';
 
@@ -64,7 +64,7 @@ export class Toast {
     private _options: Options;
     private _state: AnimationState;
     private _timeout!: number;
-    private _dimensions!: Promise<WindowDimensions>;
+    private _dimensions: Promise<WindowDimensions>;
     private _id: string;
     private _position: PointTopLeft;
 
@@ -104,10 +104,10 @@ export class Toast {
         this._state = AnimationState.WAITING;
         this._position = position;
         // Wait for the React component to render and then get the dimensions of it to resize the window.
-        const [dimensionPromise, dimensionResolve] = deferredPromise<WindowDimensions>();
-        this._dimensions = dimensionPromise;
-
+        const deferredDimensions = new DeferredPromise<WindowDimensions>();
+        this._dimensions = deferredDimensions.promise;
         const name = `${windowOptions.name}:${this.id}`;
+
         this._webWindow = createWebWindow({...windowOptions, name}).then(async (webWindow) => {
             const {window, document} = webWindow;
             this.addListeners();
@@ -116,7 +116,7 @@ export class Toast {
                 notification,
                 document,
                 store,
-                dimensionResolve
+                deferredDimensions.resolve
             );
             return webWindow;
         });
