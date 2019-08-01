@@ -1,0 +1,90 @@
+.notification-card {
+    position: relative;
+    width: 320px;
+    background: #313131;
+    border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 0px 0px 0px 1px #6E6E6E;
+    color: white;
+}
+
+.notification-card:hover {
+    /* box-shadow: 0px 0px 0px 1px #6E6E6E, 0px 0px 3px 1px rgba(64, 187, 209, 0.87); */
+    box-shadow: 0px 0px 0px 2px rgb(81, 185, 255);
+}
+
+.notification-card .header {
+    padding: 10px;
+    color: white;
+}
+
+.notification-card .header>* {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.notification-card .header .app-icon {
+    height: 24px;
+    width: 24px;
+    background: blue;
+    margin-right: 4px;
+}
+
+.notification-card .header .app-name {
+    font-weight: 500;
+    overflow: hidden;
+    width: 180px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    user-select: none;
+}
+
+.time-close {
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    padding: 8px;
+    color: #898989;
+}
+
+.time-close>* {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.time {
+    padding-right: 4px;
+}
+
+.notification-card .header .close {
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.notification-card .body {
+    padding: 0 8px 8px 8px;
+}
+
+.body .text {
+    display: block;
+    overflow: scroll;
+    font-size: 14px;
+    max-height: 200px;
+    color: #AFAFAF;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 5px;
+}
+
+.body .text::-webkit-scrollbar {
+    width: 9px;
+}
+
+.notification-card *:hover::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 4px rgba(172, 255, 255, 0.781);
+    background: rgb(106, 136, 236);
+}
