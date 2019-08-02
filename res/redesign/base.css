@@ -9,9 +9,18 @@
 body {
     background: #111;
     padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .no-select {
     user-select: none;
     -webkit-user-select: none;
+}
+
+.single-line {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
