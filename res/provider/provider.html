@@ -10,6 +10,12 @@
         <button onclick="fin.System.showDeveloperTools({uuid: 'notifications-service', name: 'notifications-service'})">
             Show Debugger
         </button>
+        <br>
+        <br>
+        <button
+            onclick="fin.Application.getCurrentSync().getChildWindows().then(cws => cws.forEach(win => win.close()));location.reload()">
+            Reload
+        </button>
     </body>
 
 </html>
