@@ -4,13 +4,15 @@
     background: #313131;
     border-radius: 7px;
     overflow: hidden;
+    transition: box-shadow 0.1s ease-in-out;
     box-shadow: 0px 0px 0px 1px #6E6E6E;
     color: white;
 }
 
 .notification-card:hover {
     /* box-shadow: 0px 0px 0px 1px #6E6E6E, 0px 0px 3px 1px rgba(64, 187, 209, 0.87); */
-    box-shadow: 0px 0px 0px 2px rgb(81, 185, 255);
+    transition: box-shadow 0.2s ease-in-out;
+    box-shadow: 0px 0px 0px 2px rgba(81, 185, 255, 0.548);
 }
 
 .notification-card .header {
@@ -116,10 +118,9 @@
 }
 
 .notification-card .buttons {
-    background: red;
     display: flex;
     justify-content: space-around;
-    border-top: #404048 solid 1px;
+    border-top: #6E6E6E solid 1px;
 }
 
 .buttons .button {
@@ -131,10 +132,13 @@
     vertical-align: middle;
     user-select: none;
     cursor: pointer;
-    border-right: 1px #404048 solid;
+    border-right: 1px #6E6E6E solid;
+    transition: background-color 0.1s ease-in-out;
+    line-height: 14px;
 }
 
 .buttons .button:hover {
+    transition: background-color 0.2s ease-in-out;
     background-color: #404048;
 }
 
@@ -148,4 +152,10 @@
     word-wrap: none;
     font-size: 14px;
     font-weight: 600;
+}
+
+.button img {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
 }

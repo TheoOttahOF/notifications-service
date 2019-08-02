@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {NotificationTime} from '../NotificationTime/NotificationTime';
-import {Button} from '../Button/Button';
+import {Button} from '../Controls/Button/Button';
 import {StoredNotification} from '../../../model/StoredNotification';
 import {CloseButton} from '../CloseButton/CloseButton';
 import {Action} from '../../../store/Actions';
