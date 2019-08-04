@@ -1,0 +1,407 @@
+$accent-color: #3cf5fb;
+$center-background-color: #3A3A3A;
+$card-background-color: #313131;
+
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+ul,
+li {
+    text-decoration: none;
+    list-style-type: none;
+}
+
+body {
+    background: black;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.accented-text {
+    color: $accent-color;
+}
+
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.single-line {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.notification-card {
+    align-self: center;
+    position: relative;
+    min-height: 100px;
+    width: 340px;
+    background: $card-background-color;
+    border-radius: 7px;
+    overflow: hidden;
+    transition: box-shadow 0.1s ease-in-out;
+    box-shadow: 0px 0px 0px 1px #6E6E6E;
+    color: white;
+
+    &:hover {
+        transition: box-shadow 0.2s ease-in-out;
+        box-shadow: 0px 0px 0px 2px $accent-color;
+    }
+
+    .header {
+        padding: 10px;
+        color: white;
+
+        &:hover .close {
+            display: block;
+        }
+
+        &:hover .time {
+            display: none;
+        }
+
+        &>* {
+            vertical-align: middle;
+            display: inline-block;
+            line-height: 18px;
+        }
+
+        .app-icon {
+            height: 24px;
+            width: 24px;
+            background-image: url(../provider/ui/favicon.png);
+            background-size: contain;
+            margin-right: 4px;
+        }
+
+        .app-name {
+            font-weight: 500;
+            width: 180px;
+            user-select: none;
+        }
+
+        .time-close {
+            position: absolute;
+            right: 0%;
+            top: 0;
+            padding: 8px;
+            color: #898989;
+
+            &>* {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .time {
+                position: relative;
+                top: 6px;
+                padding-right: 4px;
+            }
+
+            .close {
+                display: none;
+                width: 20px;
+                height: 20px;
+                background: url(../provider/ui/image/shapes/notifications-x.png) no-repeat;
+                background-position: center;
+                background-attachment: local;
+                background-size: 50%;
+                background-color: #898989;
+                border-radius: 40px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .content {
+        padding: 0 8px 8px 8px;
+
+        &:hover::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            box-shadow: inset 0 0 4px rgba(172, 255, 255, 0.781);
+            background: rgb(106, 136, 236);
+        }
+
+        &:hover::-webkit-scrollbar-thumb:hover {
+            border-radius: 10px;
+            box-shadow: inset 0 0 4px rgba(255, 0, 0, 0.781);
+            background: rgb(106, 136, 236);
+        }
+
+        .title {
+            margin-bottom: 4px;
+        }
+
+        .body {
+            .text {
+                display: block;
+                overflow: scroll;
+                font-size: 14px;
+                max-height: 200px;
+                color: #c0c0c0;
+                overflow-x: hidden;
+                overflow-y: auto;
+                padding-bottom: 5px;
+
+                p {
+                    margin-bottom: 10px;
+
+                    &:last-of-type {
+                        margin-bottom: 1px;
+                    }
+                }
+
+                .text::-webkit-scrollbar {
+                    width: 9px;
+                }
+
+                .text::-webkit-scrollbar:hover {
+                    transition: width 0.6s linear;
+                    width: 100px;
+                }
+            }
+        }
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-around;
+        border-top: #6E6E6E solid 1px;
+
+        .button {
+            display: inline-block;
+            width: 100%;
+            background: #313131;
+            padding: 10px 4px;
+            text-align: center;
+            vertical-align: middle;
+            user-select: none;
+            cursor: pointer;
+            border-right: 1px #6E6E6E solid;
+            transition: background-color 0.1s ease-in-out;
+            line-height: 14px;
+
+            &:hover {
+                transition: background-color 0.2s ease-in-out;
+                background-color: #404048;
+            }
+
+            &:last-of-type {
+                border-right: none;
+            }
+
+            span {
+                text-transform: capitalize;
+                text-overflow: ellipsis;
+                word-wrap: none;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            img {
+                width: 16px;
+                height: 16px;
+                margin-right: 4px;
+            }
+        }
+    }
+}
+
+.notification-center {
+    $header-color: #202020;
+    $primary-text-color: white;
+    $secondary-text-color: grey;
+    $secondary-text-color-highlight: rgb(180, 180, 180);
+    $strip-background-color: #121212;
+
+    height: 100vh;
+    width: 388px;
+
+    .header {
+        color: white;
+        user-select: none;
+
+        .title {
+            height: 80px;
+            padding: 10px 0;
+            background: $header-color;
+            display: flex;
+            align-content: flex-start;
+            position: relative;
+            flex-direction: row;
+
+            &>* {
+                vertical-align: middle;
+            }
+
+            span {
+                align-self: flex-start;
+                margin-left: 20px;
+                font-weight: 500;
+                font-size: 24px;
+                display: inline-block;
+            }
+
+            .close {
+                display: inline-block;
+                align-self: flex-end;
+                width: 32px;
+                height: 32px;
+                border-radius: 50px;
+                background: url(../provider/ui/image/shapes/arrow.png) no-repeat;
+                background-color: $accent-color;
+                background-position: center;
+                background-size: 50%;
+                cursor: pointer;
+            }
+        }
+
+        .strip {
+            $font-size: 12px;
+            position: relative;
+            height: 30px;
+            background: $strip-background-color;
+            display: flex;
+            padding: 0 20px;
+            align-content: flex-start;
+            flex-direction: row;
+            justify-content: space-between;
+
+
+            span {
+                vertical-align: middle;
+                align-self: center;
+                letter-spacing: 1px;
+                flex-direction: column;
+            }
+
+            // TODO Clean up how close/details/options are handled aswell as hover effect
+            .options {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                li {
+                    align-self: center;
+                    display: inline-block;
+                    color: $secondary-text-color;
+                    margin-right: 5px;
+
+                    &.option {
+                        cursor: pointer;
+                        font-weight: 500;
+
+                        &:hover {
+                            color: $secondary-text-color-highlight;
+                        }
+                    }
+
+                    &.active {
+                        color: $primary-text-color;
+                        cursor: auto !important;
+
+                        &:hover {
+                            color: $primary-text-color;
+                        }
+                    }
+
+                    &.detail {
+                        text-transform: uppercase;
+                        font-size: $font-size;
+                        color: $accent-color;
+                        cursor: auto;
+                    }
+                }
+            }
+
+            .close {
+                cursor: pointer;
+                color: $secondary-text-color;
+                font-size: $font-size;
+                text-transform: uppercase;
+
+                &:hover {
+                    color: $secondary-text-color-highlight;
+                }
+            }
+
+            .prompt {
+                width: 110px;
+                height: 30px;
+                padding-bottom: 5px;
+                background: $strip-background-color;
+                display: block;
+                position: absolute;
+                right: 0%;
+                top: 100%;
+                display: flex;
+                align-content: center;
+                justify-content: center;
+                flex-direction: row;
+                border-radius: 0 0 0 7px;
+
+                .icon {
+                    align-self: center;
+                    display: inline-block;
+                    $size: 22px;
+                    width: $size;
+                    height: $size;
+                    border-radius: $size;
+                    background: blue;
+                    margin: 0 5px;
+                    cursor: pointer;
+
+                    &.accept {
+                        transition: background-color 0.1s ease-in-out;
+                        background-color: #95D154;
+
+                        &:hover {
+                            transition: background-color 0.2s ease-in-out;
+                            background-color: #a8e765;
+                        }
+                    }
+
+                    &.cancel {
+                        transition: background-color 0.1s ease-in-out;
+                        background-color: #DF5353;
+
+                        &:hover {
+                            transition: background-color 0.2s ease-in-out;
+                            background-color: rgb(235, 105, 105);
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    .view {
+        user-select: none;
+        background: $center-background-color;
+        padding: 10px;
+        display: flex;
+        align-content: center;
+        flex-direction: column;
+
+        .group {
+            align-self: center;
+            margin-bottom: 10px;
+
+            .title {
+                color: $primary-text-color;
+                text-transform: capitalize;
+                padding: 8px 0;
+                font-size: 20px;
+            }
+        }
+    }
+}

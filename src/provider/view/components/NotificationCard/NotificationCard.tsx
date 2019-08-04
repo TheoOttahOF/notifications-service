@@ -7,6 +7,8 @@ import {CloseButton} from '../CloseButton/CloseButton';
 import {Action} from '../../../store/Actions';
 import {Actionable} from '../../containers/NotificationCenterApp';
 
+import * as styles from './NotificationCard.css';
+
 interface NotificationCardProps extends Actionable {
     notification: StoredNotification;
 }
@@ -14,6 +16,7 @@ interface NotificationCardProps extends Actionable {
 export function NotificationCard(props: NotificationCardProps) {
     const {notification, dispatch} = props;
     const data = notification.notification;
+    const appIconStyle = {backgroundImage: `url(${data.icon})`};
 
     const handleNotificationClose = () => {
         dispatch({type: Action.REMOVE, notifications: [notification]});
@@ -30,9 +33,32 @@ export function NotificationCard(props: NotificationCardProps) {
     };
 
     return (
-        <div className="notification" data-id={notification.id} onClick={handleNotificationClick}>
-            <CloseButton onClick={handleNotificationClose} />
-            <NotificationTime date={data.date} />
+        <div className="notification-card" data-id={notification.id} onClick={handleNotificationClick}>
+            <div className="header">
+                <div className="app-icon" style={appIconStyle}></div>
+                <div className="app-name no-select">Blotter App</div>
+                <div className="time-close no-select">
+                    <NotificationTime date={data.date} />
+                    <CloseButton onClick={handleNotificationClose} />
+                </div>
+            </div>
+            <div className="content">
+                <div className="title single-line">{data.title}</div>
+                <div className="body no-select">
+                    <div className="text">
+
+                    </div>
+                </div>
+            </div>
+            {data.buttons.length > 0 &&
+                <div className="buttons">
+                    {data.buttons.map((btn, i) => {
+                        return (
+                            <Button key={btn.title + i} onClick={handleButtonClick} buttonIndex={i} text={btn.title} icon={btn.iconUrl} />
+                        );
+                    })}
+                </div>
+            }
             <div className="body">
                 <div className="source">
                     {data.icon && <img src={data.icon} />}
@@ -47,15 +73,6 @@ export function NotificationCard(props: NotificationCardProps) {
                     {data.body}
                 </div>
 
-                {data.buttons.length > 0 &&
-                    <div className="buttons">
-                        {data.buttons.map((btn, i) => {
-                            return (
-                                <Button key={btn.title + i} onClick={handleButtonClick} buttonIndex={i} text={btn.title} icon={btn.iconUrl} />
-                            );
-                        })}
-                    </div>
-                }
             </div>
         </div >
     );

@@ -23,9 +23,7 @@ export function NotificationTime(props: NotificationTimeProps) {
 
     return (
         <div className="time">
-            <span>
-                {formattedDate}
-            </span>
+            {formattedDate}
         </div>
     );
 }
