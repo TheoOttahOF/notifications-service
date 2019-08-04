@@ -1,0 +1,1195 @@
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+}
+
+ul,
+li {
+  text-decoration: none;
+  list-style-type: none;
+}
+
+body {
+  background: black;
+  padding: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.accented-text {
+  color: #caeb34;
+}
+
+.no-select {
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+}
+
+.single-line {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.notification-card {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  position: relative;
+  min-height: 100px;
+  width: 340px;
+  background: #313131;
+  border-radius: 7px;
+  overflow: hidden;
+  -webkit-transition: -webkit-box-shadow 0.1s ease-in-out;
+  transition: -webkit-box-shadow 0.1s ease-in-out;
+  transition: box-shadow 0.1s ease-in-out;
+  transition: box-shadow 0.1s ease-in-out, -webkit-box-shadow 0.1s ease-in-out;
+  -webkit-box-shadow: 0px 0px 0px 1px #6E6E6E;
+          box-shadow: 0px 0px 0px 1px #6E6E6E;
+  color: white;
+}
+
+.notification-card:hover {
+  -webkit-transition: -webkit-box-shadow 0.2s ease-in-out;
+  transition: -webkit-box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
+  -webkit-box-shadow: 0px 0px 0px 2px #caeb34;
+          box-shadow: 0px 0px 0px 2px #caeb34;
+}
+
+.notification-card .loading {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.671);
+}
+
+.notification-card .loading.hidden {
+  display: none;
+}
+
+.notification-card .loading .throbber {
+  margin: auto;
+}
+
+.notification-card .header {
+  padding: 10px;
+  color: white;
+}
+
+.notification-card .header:hover .close {
+  display: block;
+}
+
+.notification-card .header:hover .time {
+  display: none;
+}
+
+.notification-card .header > * {
+  vertical-align: middle;
+  display: inline-block;
+  line-height: 18px;
+}
+
+.notification-card .header .app-icon {
+  height: 24px;
+  width: 24px;
+  background-image: url(../provider/ui/favicon.png);
+  background-size: contain;
+  margin-right: 4px;
+}
+
+.notification-card .header .app-name {
+  font-weight: 500;
+  width: 180px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.notification-card .header .time-close {
+  position: absolute;
+  right: 0%;
+  top: 0;
+  padding: 8px;
+  color: #898989;
+}
+
+.notification-card .header .time-close > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.notification-card .header .time-close .time {
+  position: relative;
+  top: 6px;
+  padding-right: 4px;
+}
+
+.notification-card .header .time-close .close {
+  display: none;
+  width: 20px;
+  height: 20px;
+  background: url(../provider/ui/image/shapes/notifications-x.png) no-repeat;
+  background-position: center;
+  background-attachment: local;
+  background-size: 50%;
+  background-color: #898989;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+.notification-card .content {
+  padding: 0 8px 8px 8px;
+}
+
+.notification-card .content:hover::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 4px rgba(172, 255, 255, 0.781);
+          box-shadow: inset 0 0 4px rgba(172, 255, 255, 0.781);
+  background: #6a88ec;
+}
+
+.notification-card .content:hover::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 4px rgba(255, 0, 0, 0.781);
+          box-shadow: inset 0 0 4px rgba(255, 0, 0, 0.781);
+  background: #6a88ec;
+}
+
+.notification-card .content .title {
+  margin-bottom: 4px;
+}
+
+.notification-card .content .body .text {
+  display: block;
+  overflow: scroll;
+  font-size: 14px;
+  max-height: 200px;
+  color: #c0c0c0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 5px;
+}
+
+.notification-card .content .body .text p {
+  margin-bottom: 10px;
+}
+
+.notification-card .content .body .text p:last-of-type {
+  margin-bottom: 1px;
+}
+
+.notification-card .content .body .text .text::-webkit-scrollbar {
+  width: 9px;
+}
+
+.notification-card .content .body .text .text::-webkit-scrollbar:hover {
+  -webkit-transition: width 0.6s linear;
+  transition: width 0.6s linear;
+  width: 100px;
+}
+
+.notification-card .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  border-top: #6E6E6E solid 1px;
+}
+
+.notification-card .buttons .button {
+  display: inline-block;
+  width: 100%;
+  background: #313131;
+  padding: 10px 4px;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  border-right: 1px #6E6E6E solid;
+  -webkit-transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
+  line-height: 14px;
+}
+
+.notification-card .buttons .button:hover {
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  background-color: #404048;
+}
+
+.notification-card .buttons .button:last-of-type {
+  border-right: none;
+}
+
+.notification-card .buttons .button span {
+  text-transform: capitalize;
+  text-overflow: ellipsis;
+  word-wrap: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.notification-card .buttons .button img {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.notification-center {
+  height: 100vh;
+  width: 388px;
+}
+
+.notification-center .header {
+  color: white;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.notification-center .header .title {
+  height: 50px;
+  padding: 10px 20px;
+  background: #202020;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.notification-center .header .title span {
+  vertical-align: middle;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  font-weight: 500;
+  font-size: 22px;
+}
+
+.notification-center .header .title .count {
+  font-size: 14px;
+  margin-left: 7px;
+  color: #999999;
+}
+
+.notification-center .header .title .close {
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  background: url(../provider/ui/image/shapes/arrow.png) no-repeat;
+  -webkit-transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
+  background-color: #caeb34;
+  background-position: center;
+  background-size: 50%;
+  cursor: pointer;
+}
+
+.notification-center .header .title .close:hover {
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  background-color: #e0ff53;
+}
+
+.notification-center .header .strip {
+  position: relative;
+  height: 30px;
+  background: #121212;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 20px;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.notification-center .header .strip span {
+  vertical-align: middle;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  letter-spacing: 1px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.notification-center .header .strip .options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.notification-center .header .strip .options li {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  display: inline-block;
+  color: grey;
+  margin-right: 5px;
+}
+
+.notification-center .header .strip .options li.option {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.notification-center .header .strip .options li.option:hover {
+  color: #b3b3b3;
+}
+
+.notification-center .header .strip .options li.active {
+  color: white;
+  cursor: auto !important;
+}
+
+.notification-center .header .strip .options li.active:hover {
+  color: white;
+}
+
+.notification-center .header .strip .options li.detail {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #caeb34;
+  cursor: auto;
+}
+
+.notification-center .header .strip .close {
+  cursor: pointer;
+  color: grey;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.notification-center .header .strip .close:hover {
+  color: #b3b3b3;
+}
+
+.notification-center .header .strip .prompt {
+  width: 110px;
+  height: 30px;
+  padding-bottom: 5px;
+  background: #121212;
+  display: block;
+  position: absolute;
+  right: 0%;
+  top: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  border-radius: 0 0 0 7px;
+}
+
+.notification-center .header .strip .prompt .icon {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 22px;
+  background: blue;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.notification-center .header .strip .prompt .icon.accept {
+  -webkit-transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
+  background-color: #95D154;
+}
+
+.notification-center .header .strip .prompt .icon.accept:hover {
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  background-color: #affd5b;
+}
+
+.notification-center .header .strip .prompt .icon.cancel {
+  -webkit-transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
+  background-color: #DF5353;
+}
+
+.notification-center .header .strip .prompt .icon.cancel:hover {
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  background-color: #ff6666;
+}
+
+.notification-center .view {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background: #3A3A3A;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.notification-center .view .group {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-bottom: 10px;
+}
+
+.notification-center .view .group .title {
+  color: white;
+  text-transform: capitalize;
+  padding: 8px 0;
+  font-size: 20px;
+}
+
+.notification-center .view .group .title span {
+  cursor: pointer;
+}
+
+.notification-center .view .group ul li {
+  margin-bottom: 12px;
+}
+
+.notification-center .view .group ul li:last-of-type {
+  margin-bottom: 0;
+}
+
+/**
+ * ==============================================
+ * Dot Stretching
+ * ==============================================
+ */
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+}
+
+ul,
+li {
+  text-decoration: none;
+  list-style-type: none;
+}
+
+body {
+  background: black;
+  padding: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.accented-text {
+  color: #caeb34;
+}
+
+.no-select {
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+}
+
+.single-line {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.notification-card {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  position: relative;
+  min-height: 100px;
+  width: 340px;
+  background: #313131;
+  border-radius: 7px;
+  overflow: hidden;
+  -webkit-transition: -webkit-box-shadow 0.1s ease-in-out;
+  transition: -webkit-box-shadow 0.1s ease-in-out;
+  transition: box-shadow 0.1s ease-in-out;
+  transition: box-shadow 0.1s ease-in-out, -webkit-box-shadow 0.1s ease-in-out;
+  -webkit-box-shadow: 0px 0px 0px 1px #6E6E6E;
+          box-shadow: 0px 0px 0px 1px #6E6E6E;
+  color: white;
+}
+
+.notification-card:hover {
+  -webkit-transition: -webkit-box-shadow 0.2s ease-in-out;
+  transition: -webkit-box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
+  -webkit-box-shadow: 0px 0px 0px 2px #caeb34;
+          box-shadow: 0px 0px 0px 2px #caeb34;
+}
+
+.notification-card .loading {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.671);
+}
+
+.notification-card .loading.hidden {
+  display: none;
+}
+
+.notification-card .loading .throbber {
+  margin: auto;
+}
+
+.notification-card .header {
+  padding: 10px;
+  color: white;
+}
+
+.notification-card .header:hover .close {
+  display: block;
+}
+
+.notification-card .header:hover .time {
+  display: none;
+}
+
+.notification-card .header > * {
+  vertical-align: middle;
+  display: inline-block;
+  line-height: 18px;
+}
+
+.notification-card .header .app-icon {
+  height: 24px;
+  width: 24px;
+  background-image: url(../provider/ui/favicon.png);
+  background-size: contain;
+  margin-right: 4px;
+}
+
+.notification-card .header .app-name {
+  font-weight: 500;
+  width: 180px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.notification-card .header .time-close {
+  position: absolute;
+  right: 0%;
+  top: 0;
+  padding: 8px;
+  color: #898989;
+}
+
+.notification-card .header .time-close > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.notification-card .header .time-close .time {
+  position: relative;
+  top: 6px;
+  padding-right: 4px;
+}
+
+.notification-card .header .time-close .close {
+  display: none;
+  width: 20px;
+  height: 20px;
+  background: url(../provider/ui/image/shapes/notifications-x.png) no-repeat;
+  background-position: center;
+  background-attachment: local;
+  background-size: 50%;
+  background-color: #898989;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+.notification-card .content {
+  padding: 0 8px 8px 8px;
+}
+
+.notification-card .content:hover::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 4px rgba(172, 255, 255, 0.781);
+          box-shadow: inset 0 0 4px rgba(172, 255, 255, 0.781);
+  background: #6a88ec;
+}
+
+.notification-card .content:hover::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 4px rgba(255, 0, 0, 0.781);
+          box-shadow: inset 0 0 4px rgba(255, 0, 0, 0.781);
+  background: #6a88ec;
+}
+
+.notification-card .content .title {
+  margin-bottom: 4px;
+}
+
+.notification-card .content .body .text {
+  display: block;
+  overflow: scroll;
+  font-size: 14px;
+  max-height: 200px;
+  color: #c0c0c0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 5px;
+}
+
+.notification-card .content .body .text p {
+  margin-bottom: 10px;
+}
+
+.notification-card .content .body .text p:last-of-type {
+  margin-bottom: 1px;
+}
+
+.notification-card .content .body .text .text::-webkit-scrollbar {
+  width: 9px;
+}
+
+.notification-card .content .body .text .text::-webkit-scrollbar:hover {
+  -webkit-transition: width 0.6s linear;
+  transition: width 0.6s linear;
+  width: 100px;
+}
+
+.notification-card .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  border-top: #6E6E6E solid 1px;
+}
+
+.notification-card .buttons .button {
+  display: inline-block;
+  width: 100%;
+  background: #313131;
+  padding: 10px 4px;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  border-right: 1px #6E6E6E solid;
+  -webkit-transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
+  line-height: 14px;
+}
+
+.notification-card .buttons .button:hover {
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  background-color: #404048;
+}
+
+.notification-card .buttons .button:last-of-type {
+  border-right: none;
+}
+
+.notification-card .buttons .button span {
+  text-transform: capitalize;
+  text-overflow: ellipsis;
+  word-wrap: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.notification-card .buttons .button img {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.notification-center {
+  height: 100vh;
+  width: 388px;
+}
+
+.notification-center .header {
+  color: white;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.notification-center .header .title {
+  height: 50px;
+  padding: 10px 20px;
+  background: #202020;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.notification-center .header .title span {
+  vertical-align: middle;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  font-weight: 500;
+  font-size: 22px;
+}
+
+.notification-center .header .title .count {
+  font-size: 14px;
+  margin-left: 7px;
+  color: #999999;
+}
+
+.notification-center .header .title .close {
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  background: url(../provider/ui/image/shapes/arrow.png) no-repeat;
+  -webkit-transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
+  background-color: #caeb34;
+  background-position: center;
+  background-size: 50%;
+  cursor: pointer;
+}
+
+.notification-center .header .title .close:hover {
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  background-color: #e0ff53;
+}
+
+.notification-center .header .strip {
+  position: relative;
+  height: 30px;
+  background: #121212;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 20px;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.notification-center .header .strip span {
+  vertical-align: middle;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  letter-spacing: 1px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.notification-center .header .strip .options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.notification-center .header .strip .options li {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  display: inline-block;
+  color: grey;
+  margin-right: 5px;
+}
+
+.notification-center .header .strip .options li.option {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.notification-center .header .strip .options li.option:hover {
+  color: #b3b3b3;
+}
+
+.notification-center .header .strip .options li.active {
+  color: white;
+  cursor: auto !important;
+}
+
+.notification-center .header .strip .options li.active:hover {
+  color: white;
+}
+
+.notification-center .header .strip .options li.detail {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #caeb34;
+  cursor: auto;
+}
+
+.notification-center .header .strip .close {
+  cursor: pointer;
+  color: grey;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.notification-center .header .strip .close:hover {
+  color: #b3b3b3;
+}
+
+.notification-center .header .strip .prompt {
+  width: 110px;
+  height: 30px;
+  padding-bottom: 5px;
+  background: #121212;
+  display: block;
+  position: absolute;
+  right: 0%;
+  top: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  border-radius: 0 0 0 7px;
+}
+
+.notification-center .header .strip .prompt .icon {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 22px;
+  background: blue;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.notification-center .header .strip .prompt .icon.accept {
+  -webkit-transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
+  background-color: #95D154;
+}
+
+.notification-center .header .strip .prompt .icon.accept:hover {
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  background-color: #affd5b;
+}
+
+.notification-center .header .strip .prompt .icon.cancel {
+  -webkit-transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
+  background-color: #DF5353;
+}
+
+.notification-center .header .strip .prompt .icon.cancel:hover {
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  background-color: #ff6666;
+}
+
+.notification-center .view {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background: #3A3A3A;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.notification-center .view .group {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-bottom: 10px;
+}
+
+.notification-center .view .group .title {
+  color: white;
+  text-transform: capitalize;
+  padding: 8px 0;
+  font-size: 20px;
+}
+
+.notification-center .view .group .title span {
+  cursor: pointer;
+}
+
+.notification-center .view .group ul li {
+  margin-bottom: 12px;
+}
+
+.notification-center .view .group ul li:last-of-type {
+  margin-bottom: 0;
+}
+
+.dot-stretching {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #caeb34;
+  color: #caeb34;
+  -webkit-transform: scale(1.25, 1.25);
+          transform: scale(1.25, 1.25);
+  -webkit-animation: dotStretching 2s infinite ease-in;
+          animation: dotStretching 2s infinite ease-in;
+}
+
+.dot-stretching::before, .dot-stretching::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot-stretching::before {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #caeb34;
+  color: #caeb34;
+  -webkit-animation: dotStretchingBefore 2s infinite ease-in;
+          animation: dotStretchingBefore 2s infinite ease-in;
+}
+
+.dot-stretching::after {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #caeb34;
+  color: #caeb34;
+  -webkit-animation: dotStretchingAfter 2s infinite ease-in;
+          animation: dotStretchingAfter 2s infinite ease-in;
+}
+
+@-webkit-keyframes dotStretching {
+  0% {
+    -webkit-transform: scale(1.25, 1.25);
+            transform: scale(1.25, 1.25);
+  }
+  50%,
+  60% {
+    -webkit-transform: scale(0.8, 0.8);
+            transform: scale(0.8, 0.8);
+  }
+  100% {
+    -webkit-transform: scale(1.25, 1.25);
+            transform: scale(1.25, 1.25);
+  }
+}
+
+@keyframes dotStretching {
+  0% {
+    -webkit-transform: scale(1.25, 1.25);
+            transform: scale(1.25, 1.25);
+  }
+  50%,
+  60% {
+    -webkit-transform: scale(0.8, 0.8);
+            transform: scale(0.8, 0.8);
+  }
+  100% {
+    -webkit-transform: scale(1.25, 1.25);
+            transform: scale(1.25, 1.25);
+  }
+}
+
+@-webkit-keyframes dotStretchingBefore {
+  0% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+  50%,
+  60% {
+    -webkit-transform: translate(-20px) scale(1, 1);
+            transform: translate(-20px) scale(1, 1);
+  }
+  100% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+}
+
+@keyframes dotStretchingBefore {
+  0% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+  50%,
+  60% {
+    -webkit-transform: translate(-20px) scale(1, 1);
+            transform: translate(-20px) scale(1, 1);
+  }
+  100% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+}
+
+@-webkit-keyframes dotStretchingAfter {
+  0% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+  50%,
+  60% {
+    -webkit-transform: translate(20px) scale(1, 1);
+            transform: translate(20px) scale(1, 1);
+  }
+  100% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+}
+
+@keyframes dotStretchingAfter {
+  0% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+  50%,
+  60% {
+    -webkit-transform: translate(20px) scale(1, 1);
+            transform: translate(20px) scale(1, 1);
+  }
+  100% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+}
+/*# sourceMappingURL=main.css.map */

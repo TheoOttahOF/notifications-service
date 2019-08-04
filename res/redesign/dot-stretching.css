@@ -1,3 +1,8 @@
+/**
+ * ==============================================
+ * Dot Stretching
+ * ==============================================
+ */
 * {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -27,7 +32,7 @@ body {
 }
 
 .accented-text {
-  color: #caeb34;
+  color: #be1c1c;
 }
 
 .no-select {
@@ -67,8 +72,8 @@ body {
   transition: -webkit-box-shadow 0.2s ease-in-out;
   transition: box-shadow 0.2s ease-in-out;
   transition: box-shadow 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
-  -webkit-box-shadow: 0px 0px 0px 2px #caeb34;
-          box-shadow: 0px 0px 0px 2px #caeb34;
+  -webkit-box-shadow: 0px 0px 0px 2px #be1c1c;
+          box-shadow: 0px 0px 0px 2px #be1c1c;
 }
 
 .notification-card .loading {
@@ -87,10 +92,6 @@ body {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.671);
-}
-
-.notification-card .loading.hidden {
-  display: none;
 }
 
 .notification-card .loading .throbber {
@@ -319,7 +320,7 @@ body {
   background: url(../provider/ui/image/shapes/arrow.png) no-repeat;
   -webkit-transition: background-color 0.1s ease-in-out;
   transition: background-color 0.1s ease-in-out;
-  background-color: #caeb34;
+  background-color: #be1c1c;
   background-position: center;
   background-size: 50%;
   cursor: pointer;
@@ -328,7 +329,7 @@ body {
 .notification-center .header .title .close:hover {
   -webkit-transition: background-color 0.2s ease-in-out;
   transition: background-color 0.2s ease-in-out;
-  background-color: #e0ff53;
+  background-color: #ff0e0e;
 }
 
 .notification-center .header .strip {
@@ -405,7 +406,7 @@ body {
 .notification-center .header .strip .options li.detail {
   text-transform: uppercase;
   font-size: 12px;
-  color: #caeb34;
+  color: #be1c1c;
   cursor: auto;
 }
 
@@ -513,10 +514,6 @@ body {
   font-size: 20px;
 }
 
-.notification-center .view .group .title span {
-  cursor: pointer;
-}
-
 .notification-center .view .group ul li {
   margin-bottom: 12px;
 }
@@ -524,4 +521,140 @@ body {
 .notification-center .view .group ul li:last-of-type {
   margin-bottom: 0;
 }
-/*# sourceMappingURL=Test.css.map */
+
+.dot-stretching {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #be1c1c;
+  color: #be1c1c;
+  -webkit-transform: scale(1.25, 1.25);
+          transform: scale(1.25, 1.25);
+  -webkit-animation: dotStretching 2s infinite ease-in;
+          animation: dotStretching 2s infinite ease-in;
+}
+
+.dot-stretching::before, .dot-stretching::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot-stretching::before {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #be1c1c;
+  color: #be1c1c;
+  -webkit-animation: dotStretchingBefore 2s infinite ease-in;
+          animation: dotStretchingBefore 2s infinite ease-in;
+}
+
+.dot-stretching::after {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #be1c1c;
+  color: #be1c1c;
+  -webkit-animation: dotStretchingAfter 2s infinite ease-in;
+          animation: dotStretchingAfter 2s infinite ease-in;
+}
+
+@-webkit-keyframes dotStretching {
+  0% {
+    -webkit-transform: scale(1.25, 1.25);
+            transform: scale(1.25, 1.25);
+  }
+  50%,
+  60% {
+    -webkit-transform: scale(0.8, 0.8);
+            transform: scale(0.8, 0.8);
+  }
+  100% {
+    -webkit-transform: scale(1.25, 1.25);
+            transform: scale(1.25, 1.25);
+  }
+}
+
+@keyframes dotStretching {
+  0% {
+    -webkit-transform: scale(1.25, 1.25);
+            transform: scale(1.25, 1.25);
+  }
+  50%,
+  60% {
+    -webkit-transform: scale(0.8, 0.8);
+            transform: scale(0.8, 0.8);
+  }
+  100% {
+    -webkit-transform: scale(1.25, 1.25);
+            transform: scale(1.25, 1.25);
+  }
+}
+
+@-webkit-keyframes dotStretchingBefore {
+  0% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+  50%,
+  60% {
+    -webkit-transform: translate(-20px) scale(1, 1);
+            transform: translate(-20px) scale(1, 1);
+  }
+  100% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+}
+
+@keyframes dotStretchingBefore {
+  0% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+  50%,
+  60% {
+    -webkit-transform: translate(-20px) scale(1, 1);
+            transform: translate(-20px) scale(1, 1);
+  }
+  100% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+}
+
+@-webkit-keyframes dotStretchingAfter {
+  0% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+  50%,
+  60% {
+    -webkit-transform: translate(20px) scale(1, 1);
+            transform: translate(20px) scale(1, 1);
+  }
+  100% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+}
+
+@keyframes dotStretchingAfter {
+  0% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+  50%,
+  60% {
+    -webkit-transform: translate(20px) scale(1, 1);
+            transform: translate(20px) scale(1, 1);
+  }
+  100% {
+    -webkit-transform: translate(0) scale(0.7, 0.7);
+            transform: translate(0) scale(0.7, 0.7);
+  }
+}
+/*# sourceMappingURL=dot-stretching.css.map */
