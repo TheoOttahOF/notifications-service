@@ -7,8 +7,10 @@ import {NotificationCard} from '../components/NotificationCard/NotificationCard'
 import {WindowDimensions} from '../../controller/ToastManager';
 import {RootState} from '../../store/State';
 import {Store} from '../../store/Store';
+import {StyleSheet} from '../theme/Stylesheet';
 
 import {Actionable} from './NotificationCenterApp';
+
 
 interface ToastAppProps extends Actionable {
     notification: StoredNotification;
@@ -54,7 +56,9 @@ const Container = connect(mapStateToProps)(ToastApp);
 export function renderApp(notification: StoredNotification, document: Document, store: Store, setWindowSize: (dim: WindowDimensions) => void) {
     ReactDOM.render(
         <Provider store={store['_store']}>
-            <Container dispatch={store.dispatch} notification={notification} setWindowSize={setWindowSize} />
+            <StyleSheet id="stylesheet" target={document}>
+                <Container dispatch={store.dispatch} notification={notification} setWindowSize={setWindowSize} />
+            </StyleSheet>
         </Provider>,
         document.getElementById('react-app')
     );

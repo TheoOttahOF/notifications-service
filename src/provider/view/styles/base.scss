@@ -1,0 +1,22 @@
+@import './variables.scss';
+
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.accented-text {
+    color: var(--accent-color);
+}
+
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.single-line {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-wrap: none;
+}

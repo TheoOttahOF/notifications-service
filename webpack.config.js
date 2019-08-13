@@ -7,9 +7,6 @@ module.exports = [
     webpackTools.createConfig(`${outputDir}/client`, './src/client/index.ts', {minify: false, isLibrary: true, libraryName: 'notifications'}, webpackTools.versionPlugin),
     webpackTools.createConfig(`${outputDir}/client`, './src/client/index.ts', {minify: true, isLibrary: true, libraryName: 'notifications', outputFilename: 'openfin-notifications'}, webpackTools.versionPlugin),
     webpackTools.createConfig(`${outputDir}/provider`, './src/provider/index.ts', undefined, webpackTools.manifestPlugin),
-    webpackTools.createConfig(`${outputDir}/provider/ui`, {
-        toast: './src/provider/view/containers/ToastApp.tsx'
-    }),
     webpackTools.createConfig(`${outputDir}/demo`, {
         app: './src/demo/app.ts',
         launcher: './src/demo/launcher.ts'
