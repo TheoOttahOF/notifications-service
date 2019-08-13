@@ -1,19 +1,31 @@
 import * as React from 'react';
 
 import {NotificationTime} from '../NotificationTime/NotificationTime';
-import {Button} from '../Button/Button';
+import {Button} from '../Controls/Button/Button';
 import {StoredNotification} from '../../../model/StoredNotification';
 import {CloseButton} from '../CloseButton/CloseButton';
+import {CircleButton} from '../CircleButton/CircleButton';
 import {Action} from '../../../store/Actions';
 import {Actionable} from '../../containers/NotificationCenterApp';
 
-interface NotificationCardProps extends Actionable {
+import {Body} from './Body';
+import {Loading} from './Loading';
+
+import './NotificationCard.scss';
+
+interface Props extends Actionable {
     notification: StoredNotification;
+    isToast?: boolean;
 }
 
-export function NotificationCard(props: NotificationCardProps) {
-    const {notification, dispatch} = props;
+NotificationCard.defaultProps = {
+    isToast: false
+};
+
+export function NotificationCard(props: Props) {
+    const {notification, dispatch, isToast} = props;
     const data = notification.notification;
+    const [loading, setLoading] = React.useState(false);
 
     const handleNotificationClose = () => {
         dispatch({type: Action.REMOVE, notifications: [notification]});
@@ -30,33 +42,42 @@ export function NotificationCard(props: NotificationCardProps) {
     };
 
     return (
-        <div className="notification" data-id={notification.id} onClick={handleNotificationClick}>
-            <CloseButton onClick={handleNotificationClose} />
-            <NotificationTime date={data.date} />
-            <div className="body">
-                <div className="source">
-                    {data.icon && <img src={data.icon} />}
-                    <span className="app-name">
-                        {notification.source.name}
-                    </span>
-                </div>
-                <div className="title">
-                    {data.title}
-                </div>
-                <div className="text">
-                    {data.body}
-                </div>
-
-                {data.buttons.length > 0 &&
-                    <div className="buttons">
-                        {data.buttons.map((btn, i) => {
-                            return (
-                                <Button key={btn.title + i} onClick={handleButtonClick} buttonIndex={i} text={btn.title} icon={btn.iconUrl} />
-                            );
-                        })}
+        <div
+            className={`notification-card no-select ${isToast ? 'toast' : ''} ${loading ? 'loading' : ''}`}
+            onClick={handleNotificationClick}
+        >
+            <div className="header">
+                <div className="app-icon" style={{backgroundImage: data.icon}}></div>
+                <div className="app-name single-line">{notification.source.name}</div>
+                <div className="time-close">
+                    <NotificationTime date={data.date} />
+                    <div className="actions">
+                        <CircleButton type='close' onClick={handleNotificationClose} />
                     </div>
-                }
+                </div>
             </div>
-        </div >
+            <div className="content">
+                <div className="title single-line">This is the title text</div>
+                <div className="body no-select">
+                    <Body text={data.body} />
+                </div>
+            </div>
+            {data.buttons.length > 0 &&
+                <div className="buttons">
+                    {data.buttons.map((btn, i) => {
+                        return (
+                            <Button
+                                key={i} text={btn.title}
+                                onClick={() => {
+                                    handleButtonClick(i);
+                                }}
+                                icon={btn.iconUrl}
+                            />
+                        );
+                    })}
+                </div>
+            }
+            {loading && <Loading />}
+        </div>
     );
 }

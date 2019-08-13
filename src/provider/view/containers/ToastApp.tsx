@@ -10,7 +10,7 @@ import {Store} from '../../store/Store';
 import {StyleSheet} from '../theme/Stylesheet';
 
 import {Actionable} from './NotificationCenterApp';
-
+import '../styles/base.scss';
 
 interface ToastAppProps extends Actionable {
     notification: StoredNotification;

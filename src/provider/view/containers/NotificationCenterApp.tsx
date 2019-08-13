@@ -8,6 +8,7 @@ import {NotificationView} from '../components/NotificationView/NotificationView'
 import {RootState, mutable} from '../../store/State';
 import {Store} from '../../store/Store';
 import {RootAction} from '../../store/Actions';
+import '../styles/base.scss';
 
 export enum GroupingType {
     APPLICATION = 'Application',
@@ -15,7 +16,7 @@ export enum GroupingType {
 }
 
 export interface Actionable {
-    dispatch: (action: RootAction)=>void;
+    dispatch: (action: RootAction) => void;
 }
 
 type Props = ReturnType<typeof mapStateToProps> & Actionable;
