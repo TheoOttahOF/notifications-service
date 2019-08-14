@@ -4,17 +4,19 @@ import {GroupingType, Actionable} from '../../containers/NotificationCenterApp/N
 import {Action} from '../../../store/Actions';
 import {CircleButton} from '../CircleButton/CircleButton';
 
-// import {ClearAllPrompt} from './ClearAllPrompt';
+import {ClearAllPrompt} from './ClearAllPrompt';
+
 import './Header.scss';
 
 interface HeaderProps extends Actionable {
+    visible: boolean;
     groupBy: GroupingType;
     handleGroupBy: (groupBy: GroupingType) => void;
 }
 
 export function Header(props: HeaderProps): React.ReactElement {
-    const {groupBy, handleGroupBy, dispatch} = props;
-
+    const {groupBy, visible, handleGroupBy, dispatch} = props;
+    const [clearAllPromptVisible, setClearAllPromptVisible] = React.useState(false);
     const handleHideWindow = () => {
         dispatch({type: Action.TOGGLE_VISIBILITY, visible: false});
     };
@@ -22,6 +24,16 @@ export function Header(props: HeaderProps): React.ReactElement {
     const handleClearAll = () => {
         dispatch({type: Action.REMOVE_ALL});
     };
+
+    const toggleClearAll = () => {
+        setClearAllPromptVisible(!clearAllPromptVisible);
+    };
+
+    React.useEffect(() => {
+        if (!visible) {
+            setClearAllPromptVisible(false);
+        }
+    }, [visible]);
 
     return (<div className="header">
         <div className="title">
@@ -50,10 +62,10 @@ export function Header(props: HeaderProps): React.ReactElement {
                     })
                 }
             </ul>
-            <span className="clear detail" onClick={handleClearAll}>
+            <span className="clear detail" onClick={toggleClearAll}>
                 Clear all
             </span>
-            {/* <ClearAllPrompt visible={confirmVisible} onChoice={handleClearAllChoice} /> */}
+            <ClearAllPrompt visible={clearAllPromptVisible} onAccept={handleClearAll} onCancel={() => setClearAllPromptVisible(false)} />
         </div>
     </div>);
 }

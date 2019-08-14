@@ -81,4 +81,22 @@
             background-color: var(--accent-color-highlight);
         }
     }
+
+    &:active {
+        animation: clickShrink 100ms ease-in-out;
+    }
+
+    @keyframes clickShrink {
+        0% {
+            transform: scale(1);
+        }
+
+        25% {
+            transform: scale(0.8);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
 }

@@ -42,13 +42,25 @@ const longNote: NotificationOptions = {
 };
 
 const buttonNote: NotificationOptions = {
-    body: 'Notification Body',
+    body: `Notification Body Commodo elit reprehenderit sint consequat officia excepteur ullamco et. Ex tempor magna ut magna. Occaecat incididunt dolore amet cillum. Occaecat ad nulla et ad Lorem. Consequat ea officia deserunt cupidatat duis id veniam id duis amet. Nisi pariatur enim pariatur amet id occaecat eu eu.
+
+Reprehenderit culpa nulla fugiat est fugiat velit id est. Labore esse qui officia laboris velit do sit proident consequat ad enim in ut. Ullamco mollit exercitation sint ea mollit magna occaecat. Veniam enim dolor excepteur labore laborum veniam sit do adipisicing. Irure fugiat labore veniam incididunt in pariatur consectetur aliquip excepteur.
+
+Reprehenderit culpa nulla fugiat est fugiat velit id est. Labore esse qui officia laboris velit do sit proident consequat ad enim in ut. Ullamco mollit exercitation sint ea mollit magna occaecat. Veniam enim dolor excepteur labore laborum veniam sit do adipisicing. Irure fugiat labore veniam incididunt in pariatur consectetur aliquip excepteur.
+
+Reprehenderit culpa nulla fugiat est fugiat velit id est. Labore esse qui officia laboris velit do sit proident consequat ad enim in ut. Ullamco mollit exercitation sint ea mollit magna occaecat. Veniam enim dolor excepteur labore laborum veniam sit do adipisicing. Irure fugiat labore veniam incididunt in pariatur consectetur aliquip excepteur.
+
+Reprehenderit culpa nulla fugiat est fugiat velit id est. Labore esse qui officia laboris velit do sit proident consequat ad enim in ut. Ullamco mollit exercitation sint ea mollit magna occaecat. Veniam enim dolor excepteur labore laborum veniam sit do adipisicing. Irure fugiat labore veniam incididunt in pariatur consectetur aliquip excepteur.
+
+Reprehenderit culpa nulla fugiat est fugiat velit id est. Labore esse qui officia laboris velit do sit proident consequat ad enim in ut. Ullamco mollit exercitation sint ea mollit magna occaecat. Veniam enim dolor excepteur labore laborum veniam sit do adipisicing. Irure fugiat labore veniam incididunt in pariatur consectetur aliquip excepteur.
+
+Sint anim non dolore non nulla Lorem eu id. Ad voluptate mollit do aute ipsum. Culpa officia amet nostrud deserunt aliquip.`,
     title: 'Notification Title ',
     subtitle: 'testSubtitle',
     icon: 'favicon.ico',
     customData: {testContext: 'testContext'},
     date: new Date(),
-    buttons: [{title: 'test1', iconUrl: 'favicon.ico'}, {title: 'test2', iconUrl: 'favicon.ico'}]
+    buttons: [{title: 'test1', iconUrl: 'favicon.ico'}, {title: 'test2'}, {title: 'test2', iconUrl: 'favicon.ico'}]
 };
 
 function makeNoteOfType(index: number) {
