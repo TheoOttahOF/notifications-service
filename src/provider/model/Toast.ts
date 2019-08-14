@@ -5,7 +5,7 @@ import Bounds from 'openfin/_v2/api/window/bounds';
 import {Signal} from 'openfin-service-signal';
 
 import {deferredPromise} from '../common/deferredPromise';
-import {renderApp} from '../view/containers/ToastApp';
+import {renderApp} from '../view/containers/ToastApp/ToastApp';
 import {Store} from '../store/Store';
 import {LayoutItem, WindowDimensions} from '../controller/Layouter';
 
@@ -30,7 +30,8 @@ const windowOptions: WindowOption = {
     cornerRounding: {
         width: 7,
         height: 7
-    }
+    },
+    waitForPageLoad: true
 };
 
 /** Margin to other toasts and the window edge. */
