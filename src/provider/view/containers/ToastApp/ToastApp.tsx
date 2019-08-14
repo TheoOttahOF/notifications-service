@@ -2,15 +2,14 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {connect, Provider} from 'react-redux';
 
-import {StoredNotification} from '../../model/StoredNotification';
-import {NotificationCard} from '../components/NotificationCard/NotificationCard';
-import {WindowDimensions} from '../../controller/Layouter';
-import {RootState} from '../../store/State';
-import {Store} from '../../store/Store';
-import {StyleSheet} from '../theme/Stylesheet';
-
-import {Actionable} from './NotificationCenterApp';
-import '../styles/base.scss';
+import {StoredNotification} from '../../../model/StoredNotification';
+import {NotificationCard} from '../../components/NotificationCard/NotificationCard';
+import {WindowDimensions} from '../../../controller/Layouter';
+import {RootState} from '../../../store/State';
+import {Store} from '../../../store/Store';
+import {Actionable} from '../NotificationCenterApp/NotificationCenterApp';
+import '../../styles/base.scss';
+import './ToastApp.scss';
 
 interface ToastAppProps extends Actionable {
     notification: StoredNotification;
@@ -56,9 +55,7 @@ const Container = connect(mapStateToProps)(ToastApp);
 export function renderApp(notification: StoredNotification, document: Document, store: Store, setWindowSize: (dim: WindowDimensions) => void) {
     ReactDOM.render(
         <Provider store={store['_store']}>
-            <StyleSheet id="stylesheet" target={document}>
-                <Container dispatch={store.dispatch} notification={notification} setWindowSize={setWindowSize} />
-            </StyleSheet>
+            <Container dispatch={store.dispatch} notification={notification} setWindowSize={setWindowSize} />
         </Provider>,
         document.getElementById('react-app')
     );

@@ -1,9 +1,13 @@
 @import '../../styles/_variables.scss';
 
+.test {
+    color: orange;
+}
+
 .notification-card {
+    width: 340px;
     align-self: center;
     max-height: 200px;
-    width: 340px;
     background: var(--card-background-color);
     border-radius: 7px;
     overflow: hidden;

@@ -2,13 +2,14 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {connect, Provider} from 'react-redux';
 
-import {Header} from '../components/Header/Header';
-import {Footer} from '../components/Footer/Footer';
-import {NotificationView} from '../components/NotificationView/NotificationView';
-import {RootState, mutable} from '../../store/State';
-import {Store} from '../../store/Store';
-import {RootAction} from '../../store/Actions';
-import '../styles/base.scss';
+import {Header} from '../../components/Header/Header';
+import {NotificationView} from '../../components/NotificationView/NotificationView';
+import {RootState, mutable} from '../../../store/State';
+import {Store} from '../../../store/Store';
+import {RootAction} from '../../../store/Actions';
+
+import '../../styles/_main.scss';
+import './NotificationCenterApp.scss';
 
 export enum GroupingType {
     APPLICATION = 'Application',
@@ -37,7 +38,7 @@ export function NotificationCenterApp(props: Props) {
                 groupBy={groupBy}
                 dispatch={dispatch}
             />
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }

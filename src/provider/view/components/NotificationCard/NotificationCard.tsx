@@ -6,7 +6,7 @@ import {StoredNotification} from '../../../model/StoredNotification';
 import {CloseButton} from '../CloseButton/CloseButton';
 import {CircleButton} from '../CircleButton/CircleButton';
 import {Action} from '../../../store/Actions';
-import {Actionable} from '../../containers/NotificationCenterApp';
+import {Actionable} from '../../containers/NotificationCenterApp/NotificationCenterApp';
 
 import {Body} from './Body';
 import {Loading} from './Loading';

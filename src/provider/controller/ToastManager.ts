@@ -56,7 +56,7 @@ export class ToastManager {
         }
 
         const toast: Toast = new Toast(this._store, notification, {
-            timeout: 10000
+            timeout: 1000000
         });
 
         this._toasts.set(id, toast);

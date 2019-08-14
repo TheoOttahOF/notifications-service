@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import './Body.scss';
+
 interface Props {
     text?: string;
 }

@@ -1,6 +1,6 @@
 const path = require('path');
-const outputDir = path.resolve(__dirname, './dist');
 
+const outputDir = path.resolve(__dirname, './dist');
 const webpackTools = require('openfin-service-tooling').webpackTools;
 
 module.exports = [
@@ -12,4 +12,8 @@ module.exports = [
         app: './src/demo/app.ts',
         launcher: './src/demo/launcher.ts'
     }, undefined, webpackTools.versionPlugin)
+    // webpackTools.createConfig(`${outputDir}/provider`, {
+    //     toast: './src/provider/view/containers/ToastApp/ToastApp.tsx',
+    //     center: './src/provider/view/containers/NotificationCenterApp/NotificationCenterApp.tsx'
+    // }, {minimize: true})
 ];

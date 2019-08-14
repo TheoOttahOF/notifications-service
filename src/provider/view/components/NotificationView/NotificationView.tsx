@@ -2,8 +2,10 @@ import * as React from 'react';
 import moment from 'moment';
 
 import {NotificationGroup} from '../NotificationGroup/NotificationGroup';
-import {GroupingType as GroupingType, Actionable} from '../../containers/NotificationCenterApp';
+import {GroupingType as GroupingType, Actionable} from '../../containers/NotificationCenterApp/NotificationCenterApp';
 import {StoredNotification} from '../../../model/StoredNotification';
+
+import './NotificationView.scss';
 
 interface NotificationViewProps extends Actionable {
     notifications: StoredNotification[];
@@ -51,7 +53,7 @@ export function NotificationView(props: NotificationViewProps) {
     const groups: Map<string, Group> = groupNotifications(notifications, groupBy);
 
     return (
-        <div className="panel">
+        <div className="view">
             {
                 [...groups.values()].map((group: Group) => (
                     <NotificationGroup

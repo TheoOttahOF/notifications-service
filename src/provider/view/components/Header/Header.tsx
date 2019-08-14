@@ -1,7 +1,11 @@
 import * as React from 'react';
 
-import {GroupingType, Actionable} from '../../containers/NotificationCenterApp';
+import {GroupingType, Actionable} from '../../containers/NotificationCenterApp/NotificationCenterApp';
 import {Action} from '../../../store/Actions';
+import {CircleButton} from '../CircleButton/CircleButton';
+
+// import {ClearAllPrompt} from './ClearAllPrompt';
+import './Header.scss';
 
 interface HeaderProps extends Actionable {
     groupBy: GroupingType;
@@ -15,26 +19,37 @@ export function Header(props: HeaderProps): React.ReactElement {
         dispatch({type: Action.TOGGLE_VISIBILITY, visible: false});
     };
 
-    return (
-        <div className='header'>
-            <div className="sort-buttons">
-                <div className="sort-title">Sort By : </div>
+    return (<div className="header">
+        <div className="title">
+            <div>
+                {/* <span className="count">(13214)</span> */}
+            </div>
+            <CircleButton type="hide" size="large" />
+        </div>
+        <div className="strip">
+            <ul className="options">
+                <li className="detail">
+                    <span>Sort By:</span>
+                </li>
                 {
                     Object.values(GroupingType).map((name, i) => {
-                        const selected = name === groupBy ? 'selected' : null;
+                        const selected = name === groupBy ? 'active' : null;
                         return (
-                            <div
+                            <li
                                 key={i}
                                 className={`sort-button ${selected}`}
                                 onClick={() => handleGroupBy(name)}
                             >
-                                {name}
-                            </div>
+                                <span>{name}</span>
+                            </li>
                         );
                     })
                 }
-            </div>
-            <img id="exit-link" onClick={handleHideWindow} src="image/shapes/arrow.png" alt="" />
+            </ul>
+            <span className="clear detail" onClick={handleHideWindow}>
+                Clear all
+            </span>
+            {/* <ClearAllPrompt visible={confirmVisible} onChoice={handleClearAllChoice} /> */}
         </div>
-    );
+    </div>);
 }

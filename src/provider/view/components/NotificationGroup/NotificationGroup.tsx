@@ -2,41 +2,56 @@ import * as React from 'react';
 
 import {NotificationCard} from '../NotificationCard/NotificationCard';
 import {StoredNotification} from '../../../model/StoredNotification';
-import {CloseButton} from '../CloseButton/CloseButton';
-import {Actionable} from '../../containers/NotificationCenterApp';
+import {Actionable} from '../../containers/NotificationCenterApp/NotificationCenterApp';
 import {Action} from '../../../store/Actions';
+import {CircleButton} from '../CircleButton/CircleButton';
+import './NotificationGroup.scss';
 
-export interface NotificationGroupProps extends Actionable {
+interface Props extends Actionable {
     // Group name
     name: string;
     // Notifications in this group
     notifications: StoredNotification[];
 }
 
-export function NotificationGroup(props: NotificationGroupProps) {
-    const {notifications, dispatch} = props;
+export function NotificationGroup(props: Props) {
+    const {notifications, dispatch, name} = props;
     const handleClearAll = () => {
         dispatch({type: Action.REMOVE, notifications});
     };
+
     return (
         <div className="group">
-            <div className="header">
-                <div className="title">
-                    {props.name.toUpperCase()}
-                </div>
-                <CloseButton onClick={handleClearAll} />
+            <div className="title">
+                <span>{name}</span>
+                <CircleButton type="close" size="small" />
             </div>
-            <ul>
+            {/* <TransitionGroup className="notifications" component="ul"> */}
+            <ul className="notifications">
                 {
                     notifications.map((notification, i) => {
                         return (
-                            <li key={i + notification.id}>
+                            // <CSSTransition
+                            //     key={note}
+                            //     timeout={{
+                            //         enter: 300,
+                            //         exit: 300,
+                            //     }}
+                            //     classNames="item"
+                            // >
+                            <li key={notification.id}>
+                                {/* <CSSTransition
+                                            timeout={500}
+                                        > */}
                                 <NotificationCard notification={notification} dispatch={dispatch} />
+                                {/* </CSSTransition> */}
                             </li>
+                            // </CSSTransition>
                         );
                     })
                 }
             </ul>
+            {/* </TransitionGroup> */}
         </div>
     );
 }

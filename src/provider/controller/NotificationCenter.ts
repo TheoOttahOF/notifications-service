@@ -7,7 +7,7 @@ import {TrayIcon} from '../common/TrayIcon';
 import {WebWindow, createWebWindow} from '../model/WebWindow';
 import {Action} from '../store/Actions';
 import {Store} from '../store/Store';
-import {renderApp} from '../view/containers/NotificationCenterApp';
+import {renderApp} from '../view/containers/NotificationCenterApp/NotificationCenterApp';
 
 import {AsyncInit} from './AsyncInit';
 
@@ -53,6 +53,7 @@ export class NotificationCenter extends AsyncInit {
         await this.addListeners();
         renderApp(this._webWindow.document, this._store);
         await this.subscribe();
+        this.showWindow();
     }
 
     /**

@@ -1,4 +1,5 @@
 @import './variables.scss';
+// @import url(https://fonts.googleapis.com/css?family=Nunito);
 
 * {
     margin: 0;
@@ -8,9 +9,22 @@
 }
 
 body {
+
+    overflow: hidden !important;
+    width: 100vw;
+    height: 100vh;
+
     font-family: 'Nunito', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    &#toast-container {
+        padding: 0 !important;
+        margin: 0;
+        overflow: hidden !important;
+        width: 100vw;
+        height: 100vh;
+    }
 }
 
 .accented-text {
