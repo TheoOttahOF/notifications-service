@@ -120,12 +120,13 @@ export class NotificationCenter extends AsyncInit {
         const {window} = this._webWindow;
         await this.hideWindow(true);
         const monitorInfo = await fin.System.getMonitorInfo();
+        const {availableRect} = monitorInfo.primaryMonitor;
         const idealWidth = 388;
         return window.setBounds({
-            left: monitorInfo.primaryMonitor.availableRect.right - idealWidth,
-            top: 0,
+            left: availableRect.right - idealWidth,
+            top: availableRect.top,
             width: idealWidth,
-            height: monitorInfo.primaryMonitor.availableRect.bottom
+            height: availableRect.bottom - availableRect.top
         });
     }
 
