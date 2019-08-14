@@ -8,6 +8,7 @@ import {RootState, Immutable, mutable} from './State';
 export const enum Action {
     CREATE = '@@notifications/CREATE',
     REMOVE = '@@notifications/REMOVE',
+    REMOVE_ALL = '@@notifications/REMOVE_ALL',
     CLICK_NOTIFICATION = '@@notifications/CLICK_NOTIFICATION',
     CLICK_BUTTON = '@@notifications/CLICK_BUTTON',
     TOGGLE_VISIBILITY = '@@ui/TOGGLE_CENTER_WINDOW',
@@ -21,6 +22,10 @@ export interface CreateNotification extends ReduxAction<Action> {
 export interface RemoveNotifications extends ReduxAction<Action> {
     type: Action.REMOVE,
     notifications: StoredNotification[];
+}
+
+export interface RemoveAllNotifications extends ReduxAction<Action> {
+    type: Action.REMOVE_ALL
 }
 
 export interface ClickNotification extends ReduxAction<Action> {
@@ -39,7 +44,7 @@ export interface ToggleVisibility extends ReduxAction<Action> {
     visible?: boolean;
 }
 
-export type RootAction = CreateNotification|RemoveNotifications|ClickNotification|ClickButton|ToggleVisibility;
+export type RootAction = CreateNotification | RemoveNotifications | RemoveAllNotifications | ClickNotification | ClickButton | ToggleVisibility;
 
 export type ActionOf<A> = RootAction extends {type: A} ? RootAction : never;
 export type ActionHandler<A> = (state: Immutable<RootState>, action: ActionOf<A>) => RootState;
@@ -78,6 +83,13 @@ export const Actions: ActionMap = {
         return {
             ...state,
             notifications: mutable(state.notifications.filter(n => idsToRemove.indexOf(n.id) === -1))
+        };
+    },
+    [Action.REMOVE_ALL]: (state: Immutable<RootState>): RootState => {
+        // TODO: This requires Phil's PR to work properly in which it sends the events to all the clients
+        return {
+            ...state,
+            notifications: []
         };
     },
     [Action.TOGGLE_VISIBILITY]: (state: Immutable<RootState>, action: ToggleVisibility): RootState => {

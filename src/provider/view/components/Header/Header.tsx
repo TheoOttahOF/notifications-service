@@ -19,6 +19,10 @@ export function Header(props: HeaderProps): React.ReactElement {
         dispatch({type: Action.TOGGLE_VISIBILITY, visible: false});
     };
 
+    const handleClearAll = () => {
+        dispatch({type: Action.REMOVE_ALL});
+    };
+
     return (<div className="header">
         <div className="title">
             <div>
@@ -46,7 +50,7 @@ export function Header(props: HeaderProps): React.ReactElement {
                     })
                 }
             </ul>
-            <span className="clear detail">
+            <span className="clear detail" onClick={handleClearAll}>
                 Clear all
             </span>
             {/* <ClearAllPrompt visible={confirmVisible} onChoice={handleClearAllChoice} /> */}
