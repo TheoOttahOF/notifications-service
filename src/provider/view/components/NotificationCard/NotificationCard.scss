@@ -92,6 +92,7 @@
         }
 
         .app-name {
+            text-transform: capitalize;
             display: inline-block;
             font-weight: 500;
             user-select: none;
@@ -123,7 +124,7 @@
                 color: var(--card-background-color);
 
                 .icon {
-                    margin: 0 2px;
+                    margin-left: 2px;
 
                     &:last-of-type {
                         margin-right: 0;

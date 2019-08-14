@@ -30,8 +30,7 @@ const windowOptions: WindowOption = {
     cornerRounding: {
         width: 7,
         height: 7
-    },
-    waitForPageLoad: true
+    }
 };
 
 /** Margin to other toasts and the window edge. */

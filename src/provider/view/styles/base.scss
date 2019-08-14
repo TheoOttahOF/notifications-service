@@ -9,10 +9,9 @@
 }
 
 body {
-    background: var(--center-background-color);
-    overflow: hidden !important;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 
     font-family: 'Nunito', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -25,6 +24,10 @@ body {
         width: 100vw;
         height: 100vh;
     }
+}
+
+#react-app {
+    height: 100%;
 }
 
 .accented-text {
