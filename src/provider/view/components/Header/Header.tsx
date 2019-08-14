@@ -24,7 +24,7 @@ export function Header(props: HeaderProps): React.ReactElement {
             <div>
                 {/* <span className="count">(13214)</span> */}
             </div>
-            <CircleButton type="hide" size="large" />
+            <CircleButton type="hide" size="large" onClick={handleHideWindow} />
         </div>
         <div className="strip">
             <ul className="options">
@@ -46,7 +46,7 @@ export function Header(props: HeaderProps): React.ReactElement {
                     })
                 }
             </ul>
-            <span className="clear detail" onClick={handleHideWindow}>
+            <span className="clear detail">
                 Clear all
             </span>
             {/* <ClearAllPrompt visible={confirmVisible} onChoice={handleClearAllChoice} /> */}

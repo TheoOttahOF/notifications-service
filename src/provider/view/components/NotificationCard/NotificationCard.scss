@@ -7,7 +7,6 @@
 .notification-card {
     width: 340px;
     align-self: center;
-    max-height: 200px;
     background: var(--card-background-color);
     border-radius: 7px;
     overflow: hidden;
@@ -115,7 +114,7 @@
                 display: none;
                 display: inline-block;
                 position: relative;
-                top: -2px;
+                top: -3px;
                 margin-right: 4px;
             }
 
@@ -140,11 +139,10 @@
         .title {
             margin-bottom: 4px;
         }
-
-
     }
 
     .buttons {
+        max-height: 40px;
         display: flex;
         justify-content: space-around;
         flex-direction: row;
@@ -177,7 +175,6 @@
             }
 
             .value {
-                height: 100%;
                 display: flex;
                 align-content: center;
                 justify-content: center;
@@ -194,7 +191,6 @@
                 }
 
                 img {
-                    align-self: center;
                     width: 16px;
                     height: 16px;
                     min-width: 16px;

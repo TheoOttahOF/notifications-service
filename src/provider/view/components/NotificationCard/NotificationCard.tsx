@@ -47,7 +47,7 @@ export function NotificationCard(props: Props) {
             onClick={handleNotificationClick}
         >
             <div className="header">
-                <div className="app-icon" style={{backgroundImage: data.icon}}></div>
+                <div className="app-icon" style={{backgroundImage: `url(${data.icon})`}}></div>
                 <div className="app-name single-line">{notification.source.name}</div>
                 <div className="time-close">
                     <NotificationTime date={data.date} />

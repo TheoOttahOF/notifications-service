@@ -3,12 +3,13 @@
 .test {
     color: red;
 }
+
 .body {
     .text {
         display: block;
         overflow: scroll;
         font-size: 14px;
-        max-height: 600px;
+        max-height: 400px;
         color: #dddddd;
         overflow-x: hidden;
         overflow-y: auto;

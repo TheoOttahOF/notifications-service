@@ -1,5 +1,5 @@
-@import './variables.scss';
-// @import url(https://fonts.googleapis.com/css?family=Nunito);
+@import './_variables.scss';
+@import url(https://fonts.googleapis.com/css?family=Nunito);
 
 * {
     margin: 0;
@@ -9,7 +9,7 @@
 }
 
 body {
-
+    background: var(--center-background-color);
     overflow: hidden !important;
     width: 100vw;
     height: 100vh;
