@@ -1,34 +1,30 @@
 import React from 'react';
-// import {CSSTransition} from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
 
 import {CircleButton} from '../CircleButton/CircleButton';
 import './ClearAllPrompt.scss';
 
-const duration = 300;
 
 interface Props {
     visible: boolean;
-    onChoice: (choice: boolean) => void;
+    onAccept: () => void;
+    onCancel: () => void;
 }
 
 export function ClearAllPrompt(props: Props) {
-    const {visible, onChoice} = props;
-
-    const handleClick = (choice: boolean) => {
-        onChoice(choice);
-    };
+    const {visible, onAccept, onCancel} = props;
 
     return (
-        // <CSSTransition
-        //     in={visible}
-        //     timeout={duration}
-        //     classNames="animate"
-        //     unmountOnExit
-        // >
-        <div className="prompt">
-            <CircleButton type="cancel" />
-            <CircleButton type="accept" />
-        </div>
-        // </CSSTransition>
+        <CSSTransition
+            in={visible}
+            timeout={200}
+            classNames="animate"
+            unmountOnExit
+        >
+            <div className="prompt">
+                <CircleButton type="cancel" onClick={onCancel} />
+                <CircleButton type="accept" onClick={onAccept} />
+            </div>
+        </CSSTransition>
     );
 }

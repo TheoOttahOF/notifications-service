@@ -45,7 +45,6 @@
             letter-spacing: 1px;
         }
 
-        // TODO Clean up how close/details/options are handled aswell as hover effect
         .options {
             display: flex;
             flex-direction: row;
@@ -91,7 +90,6 @@
             font-size: $font-size;
             text-transform: uppercase;
             position: relative;
-            top: 3px;
 
             &:hover {
                 color: var(--secondary-text-color-highlight);
