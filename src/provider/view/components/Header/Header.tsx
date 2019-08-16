@@ -12,17 +12,18 @@ interface HeaderProps extends Actionable {
     visible: boolean;
     groupBy: GroupingType;
     handleGroupBy: (groupBy: GroupingType) => void;
+    onClearAll: () => void;
 }
 
 export function Header(props: HeaderProps): React.ReactElement {
-    const {groupBy, visible, handleGroupBy, dispatch} = props;
+    const {groupBy, visible, handleGroupBy, onClearAll, dispatch} = props;
     const [clearAllPromptVisible, setClearAllPromptVisible] = React.useState(false);
     const handleHideWindow = () => {
         dispatch({type: Action.TOGGLE_VISIBILITY, visible: false});
     };
 
     const handleClearAll = () => {
-        dispatch({type: Action.REMOVE_ALL});
+
     };
 
     const toggleClearAll = () => {
