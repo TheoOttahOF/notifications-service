@@ -9,7 +9,7 @@ import './NotificationView.scss';
 
 interface NotificationViewProps extends Actionable {
     notifications: StoredNotification[];
-    groupBy?: GroupingType;
+    groupBy: GroupingType;
 }
 
 /**
@@ -47,7 +47,7 @@ interface Group {
  * @param props Props
  */
 export function NotificationView(props: NotificationViewProps) {
-    const {notifications, groupBy = GroupingType.APPLICATION, ...rest} = props;
+    const {notifications, groupBy, ...rest} = props;
     // TODO: Use useEffect hook
     // Sort the notification by groups
     const groups: Map<string, Group> = groupNotifications(notifications, groupBy);
