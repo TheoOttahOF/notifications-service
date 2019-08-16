@@ -124,11 +124,10 @@
                 color: var(--card-background-color);
 
                 .icon {
-                    margin-left: 2px;
-
-                    &:last-of-type {
-                        margin-right: 0;
-                    }
+                    margin-right: -3px;
+                    $size: 22px;
+                    width: $size;
+                    height: $size;
                 }
             }
         }
