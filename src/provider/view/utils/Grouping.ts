@@ -20,6 +20,10 @@ export interface Group {
      */
     key: string;
     /**
+     * The grouping type used to create this group.
+     */
+    type: GroupingType;
+    /**
      * User-visibile title that will be displayed above these notifications
      */
     title: string;
@@ -92,6 +96,7 @@ export function groupNotifications(notifications: StoredNotification[], groupMet
             }
             groups.set(groupTitle, {
                 key: key,
+                type: groupMethod,
                 title: groupTitle,
                 notifications: [currentNotification]
             });

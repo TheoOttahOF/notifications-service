@@ -38,7 +38,6 @@ export function NotificationGroup(props: Props) {
                                     enter: 300,
                                     exit: 300
                                 }}
-                                in={true}
                                 classNames="item"
                             >
                                 <li key={notification.id}>

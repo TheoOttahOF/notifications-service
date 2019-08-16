@@ -32,6 +32,10 @@
         animation: fadeIn 300ms ease-in forwards reverse;
     }
 
+    .group-item-enter-done {
+        opacity: 1;
+    }
+
     .group-item-enter-active {
         animation: fadeIn 300ms ease-in forwards;
     }

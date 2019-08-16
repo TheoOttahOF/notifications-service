@@ -23,9 +23,12 @@ interface NotificationViewProps extends Actionable {
  */
 export function NotificationView(props: NotificationViewProps) {
     const {notifications, groupBy, ...rest} = props;
-    // TODO: Use useEffect hook
-    // Sort the notification by groups
-    const groups: Map<string, Group> = groupNotifications(notifications, groupBy);
+    const [groups, setGroups] = React.useState<Map<string, Group>>(new Map());
+
+    React.useEffect(() => {
+        // Sort the notification by groups
+        setGroups(groupNotifications(notifications, groupBy));
+    }, [notifications, groupBy]);
 
     return (
         <TransitionGroup className="view" component="div">
@@ -35,6 +38,7 @@ export function NotificationView(props: NotificationViewProps) {
                         key={group.key}
                         timeout={300}
                         classNames="group-item"
+                        exit={groupBy === group.type}
                     >
                         <NotificationGroup
                             key={group.key}
