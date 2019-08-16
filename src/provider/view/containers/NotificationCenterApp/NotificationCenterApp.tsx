@@ -7,14 +7,10 @@ import {NotificationView} from '../../components/NotificationView/NotificationVi
 import {RootState} from '../../../store/State';
 import {Store} from '../../../store/Store';
 import {RemoveNotifications, Actionable} from '../../../store/Actions';
+import {GroupingType} from '../../utils/Grouping';
 
 import '../../styles/_main.scss';
 import './NotificationCenterApp.scss';
-
-export enum GroupingType {
-    APPLICATION = 'Application',
-    DATE = 'Date'
-}
 
 type Props = ReturnType<typeof mapStateToProps> & Actionable;
 

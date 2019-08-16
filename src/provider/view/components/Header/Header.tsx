@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {GroupingType} from '../../containers/NotificationCenterApp/NotificationCenterApp';
+import {GroupingType} from '../../utils/Grouping';
 import {Actionable} from '../../../store/Actions';
 import {CircleButton} from '../CircleButton/CircleButton';
 import {ToggleVisibility} from '../../../store/Actions';
