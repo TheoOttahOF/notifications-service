@@ -33,7 +33,7 @@ export function NotificationGroup(props: Props) {
                     notifications.map((notification, i) => {
                         return (
                             <CSSTransition
-                                key={notification.id + notification.notification.date}
+                                key={notification.id}
                                 timeout={{
                                     enter: 300,
                                     exit: 300

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {TransitionGroup, CSSTransition} from 'react-transition-group';
 
 import {NotificationGroup} from '../NotificationGroup/NotificationGroup';
 import {GroupingType, Group, groupNotifications} from '../../utils/Grouping';
@@ -27,17 +28,23 @@ export function NotificationView(props: NotificationViewProps) {
     const groups: Map<string, Group> = groupNotifications(notifications, groupBy);
 
     return (
-        <div className="view">
+        <TransitionGroup className="view" component="div">
             {
                 [...groups.values()].map((group: Group) => (
-                    <NotificationGroup
+                    <CSSTransition
                         key={group.key}
-                        name={group.title}
-                        notifications={group.notifications}
-                        {...rest}
-                    />
+                        timeout={300}
+                        classNames="group-item"
+                    >
+                        <NotificationGroup
+                            key={group.key}
+                            name={group.title}
+                            notifications={group.notifications}
+                            {...rest}
+                        />
+                    </CSSTransition>
                 ))
             }
-        </div>
+        </TransitionGroup>
     );
 }
