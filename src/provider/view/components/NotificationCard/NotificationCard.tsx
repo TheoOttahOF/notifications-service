@@ -4,7 +4,7 @@ import {NotificationTime} from '../NotificationTime/NotificationTime';
 import {Button} from '../Controls/Button/Button';
 import {StoredNotification} from '../../../model/StoredNotification';
 import {CircleButton} from '../CircleButton/CircleButton';
-import {Actionable} from '../../containers/NotificationCenterApp/NotificationCenterApp';
+import {Actionable} from '../../../store/Actions';
 import {RemoveNotifications, ClickButton, ClickNotification} from '../../../store/Actions';
 
 import {Body} from './Body';

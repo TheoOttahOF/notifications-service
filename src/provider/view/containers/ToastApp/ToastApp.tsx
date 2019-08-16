@@ -7,7 +7,8 @@ import {NotificationCard} from '../../components/NotificationCard/NotificationCa
 import {WindowDimensions} from '../../../controller/Layouter';
 import {RootState} from '../../../store/State';
 import {Store} from '../../../store/Store';
-import {Actionable} from '../NotificationCenterApp/NotificationCenterApp';
+import {Actionable} from '../../../store/Actions';
+
 import '../../styles/base.scss';
 import './ToastApp.scss';
 

@@ -6,7 +6,7 @@ import {Header} from '../../components/Header/Header';
 import {NotificationView} from '../../components/NotificationView/NotificationView';
 import {RootState} from '../../../store/State';
 import {Store} from '../../../store/Store';
-import {RootAction, RemoveNotifications} from '../../../store/Actions';
+import {RemoveNotifications, Actionable} from '../../../store/Actions';
 
 import '../../styles/_main.scss';
 import './NotificationCenterApp.scss';
@@ -14,10 +14,6 @@ import './NotificationCenterApp.scss';
 export enum GroupingType {
     APPLICATION = 'Application',
     DATE = 'Date'
-}
-
-export interface Actionable {
-    storeDispatch: (action: RootAction) => void;
 }
 
 type Props = ReturnType<typeof mapStateToProps> & Actionable;

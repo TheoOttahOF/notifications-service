@@ -3,7 +3,7 @@ import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 import {NotificationCard} from '../NotificationCard/NotificationCard';
 import {StoredNotification} from '../../../model/StoredNotification';
-import {Actionable} from '../../containers/NotificationCenterApp/NotificationCenterApp';
+import {Actionable} from '../../../store/Actions';
 import {RemoveNotifications} from '../../../store/Actions';
 import {CircleButton} from '../CircleButton/CircleButton';
 
