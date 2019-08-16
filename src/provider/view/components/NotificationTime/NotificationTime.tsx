@@ -24,7 +24,6 @@ moment.locale('en', {
     }
 });
 
-
 export function NotificationTime(props: NotificationTimeProps) {
     const {date} = props;
 

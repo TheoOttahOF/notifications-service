@@ -4,7 +4,6 @@ import {CSSTransition} from 'react-transition-group';
 import {CircleButton} from '../CircleButton/CircleButton';
 import './ClearAllPrompt.scss';
 
-
 interface Props {
     visible: boolean;
     onAccept: () => void;
