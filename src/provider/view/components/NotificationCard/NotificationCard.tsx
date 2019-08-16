@@ -3,10 +3,9 @@ import * as React from 'react';
 import {NotificationTime} from '../NotificationTime/NotificationTime';
 import {Button} from '../Controls/Button/Button';
 import {StoredNotification} from '../../../model/StoredNotification';
-import {CloseButton} from '../CloseButton/CloseButton';
 import {CircleButton} from '../CircleButton/CircleButton';
-import {Action} from '../../../store/Actions';
 import {Actionable} from '../../containers/NotificationCenterApp/NotificationCenterApp';
+import {RemoveNotifications, ClickButton, ClickNotification} from '../../../store/Actions';
 
 import {Body} from './Body';
 import {Loading} from './Loading';
@@ -23,22 +22,22 @@ NotificationCard.defaultProps = {
 };
 
 export function NotificationCard(props: Props) {
-    const {notification, dispatch, isToast} = props;
+    const {notification, storeDispatch, isToast} = props;
     const data = notification.notification;
     const [loading, setLoading] = React.useState(false);
 
     const handleNotificationClose = () => {
-        dispatch({type: Action.REMOVE, notifications: [notification]});
+        storeDispatch(new RemoveNotifications([notification]));
     };
 
     const handleButtonClick = (buttonIndex: number) => {
-        dispatch({type: Action.CLICK_BUTTON, notification, buttonIndex});
+        storeDispatch(new ClickButton(notification, buttonIndex));
     };
 
     const handleNotificationClick = (event: React.MouseEvent) => {
         event.stopPropagation();
         event.preventDefault();
-        dispatch({type: Action.CLICK_NOTIFICATION, notification});
+        storeDispatch(new ClickNotification(notification));
     };
 
     return (

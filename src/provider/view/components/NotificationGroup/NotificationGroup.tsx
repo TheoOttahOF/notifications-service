@@ -4,8 +4,9 @@ import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import {NotificationCard} from '../NotificationCard/NotificationCard';
 import {StoredNotification} from '../../../model/StoredNotification';
 import {Actionable} from '../../containers/NotificationCenterApp/NotificationCenterApp';
-import {Action} from '../../../store/Actions';
+import {RemoveNotifications} from '../../../store/Actions';
 import {CircleButton} from '../CircleButton/CircleButton';
+
 import './NotificationGroup.scss';
 
 interface Props extends Actionable {
@@ -16,10 +17,9 @@ interface Props extends Actionable {
 }
 
 export function NotificationGroup(props: Props) {
-    const {notifications, dispatch, name} = props;
-
+    const {notifications, storeDispatch, name} = props;
     const handleClearAll = () => {
-        dispatch({type: Action.REMOVE, notifications});
+        storeDispatch(new RemoveNotifications(notifications));
     };
 
     return (
@@ -42,7 +42,7 @@ export function NotificationGroup(props: Props) {
                                 classNames="item"
                             >
                                 <li key={notification.id}>
-                                    <NotificationCard notification={notification} dispatch={dispatch} />
+                                    <NotificationCard notification={notification} storeDispatch={storeDispatch} />
                                 </li>
                             </CSSTransition>
                         );

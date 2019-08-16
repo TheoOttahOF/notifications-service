@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import {GroupingType, Actionable} from '../../containers/NotificationCenterApp/NotificationCenterApp';
-import {Action} from '../../../store/Actions';
 import {CircleButton} from '../CircleButton/CircleButton';
+import {ToggleVisibility} from '../../../store/Actions';
 
 import {ClearAllPrompt} from './ClearAllPrompt';
 
@@ -16,14 +16,14 @@ interface HeaderProps extends Actionable {
 }
 
 export function Header(props: HeaderProps): React.ReactElement {
-    const {groupBy, visible, handleGroupBy, onClearAll, dispatch} = props;
+    const {groupBy, visible, handleGroupBy, onClearAll, storeDispatch} = props;
     const [clearAllPromptVisible, setClearAllPromptVisible] = React.useState(false);
     const handleHideWindow = () => {
-        dispatch({type: Action.TOGGLE_VISIBILITY, visible: false});
+        storeDispatch(new ToggleVisibility(false));
     };
 
     const handleClearAll = () => {
-
+        onClearAll();
     };
 
     const toggleClearAll = () => {
