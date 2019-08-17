@@ -4,8 +4,8 @@ $accent-color-highlight: lighten(saturate($accent-color, 40%), 10%);
 :root {
     --accent-color: #{$accent-color};
     --accent-color-highlight: #{$accent-color-highlight};
-    --center-background-color: #484848;
-    --card-background-color: #313131;
+    --center-background-color: #313131;
+    --card-background-color: #484848;
     --card-border-color: #6E6E6E;
     --header-color: #121212;
     --primary-text-color: white;
