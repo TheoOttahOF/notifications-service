@@ -12,6 +12,12 @@ interface Props {
 
 export function ClearAllPrompt(props: Props) {
     const {visible, onAccept, onCancel} = props;
+    const divRef = React.createRef<HTMLDivElement>();
+
+    React.useEffect(() => {
+        if (visible)
+            divRef.current!.focus();
+    }, [visible]);
 
     return (
         <CSSTransition
@@ -20,7 +26,7 @@ export function ClearAllPrompt(props: Props) {
             classNames="animate"
             unmountOnExit
         >
-            <div className="prompt">
+            <div tabIndex={0} className="prompt" ref={divRef} onBlur={onCancel}>
                 <CircleButton type="cancel" onClick={onCancel} />
                 <CircleButton type="accept" onClick={onAccept} />
             </div>

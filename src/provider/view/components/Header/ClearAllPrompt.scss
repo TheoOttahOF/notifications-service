@@ -17,6 +17,10 @@
     z-index: 100;
     overflow: hidden;
 
+    &:focus {
+        outline: none;
+    }
+
     .icon {
         margin: 4px 5px;
     }
