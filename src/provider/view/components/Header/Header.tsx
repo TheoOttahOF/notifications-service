@@ -25,6 +25,7 @@ export function Header(props: HeaderProps): React.ReactElement {
 
     const handleClearAll = () => {
         onClearAll();
+        toggleClearAll();
     };
 
     const toggleClearAll = () => {
@@ -67,7 +68,7 @@ export function Header(props: HeaderProps): React.ReactElement {
             <span className="clear detail" onClick={toggleClearAll}>
                 Clear all
             </span>
-            <ClearAllPrompt visible={clearAllPromptVisible} onAccept={handleClearAll} onCancel={() => setClearAllPromptVisible(false)} />
+            <ClearAllPrompt visible={clearAllPromptVisible} onAccept={handleClearAll} onCancel={toggleClearAll} />
         </div>
     </div>);
 }
