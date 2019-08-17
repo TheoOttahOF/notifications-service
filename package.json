@@ -36,6 +36,7 @@
   "homepage": "https://github.com/openfin/Notification-Service#readme",
   "dependencies": {},
   "devDependencies": {
+    "@types/markdown-it": "0.0.8",
     "@types/mkdirp": "^0.5.2",
     "@types/moment": "^2.13.0",
     "@types/node": "^9.4.6",
@@ -51,6 +52,7 @@
     "express": "^4.16.2",
     "hadouken-js-adapter": "^0.39.1",
     "inversify": "^5.0.1",
+    "markdown-it": "^9.1.0",
     "mkdirp": "^0.5.1",
     "moment": "^2.22.1",
     "node-fetch": "^2.6.0",
