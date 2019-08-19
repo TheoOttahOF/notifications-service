@@ -3,6 +3,7 @@
 .group {
     align-self: center;
     margin-bottom: 10px;
+    position: sticky;
 
     &>.title {
         color: var(--primary-text-color);
