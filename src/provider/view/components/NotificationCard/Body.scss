@@ -31,10 +31,7 @@
         h2,
         h3,
         h4 {
-            font-size: 18px;
-        }
-
-        h2 {
+            font-size: 16px;
             font-weight: 400;
         }
 
@@ -43,11 +40,7 @@
         }
 
         p {
-            margin: 5px 0;
-
-            &:first-of-type {
-                margin-top: 0;
-            }
+            margin: 3px 0;
 
             &:last-of-type {
                 margin-bottom: 0;
@@ -64,6 +57,11 @@
                 list-style-type: disc;
                 width: 100%;
             }
+        }
+
+        blockquote {
+            border-left: .25em solid #dfe2e5;
+            padding: 0 10px;
         }
 
         img {

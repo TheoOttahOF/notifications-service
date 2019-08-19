@@ -7,7 +7,6 @@ const md = markdown('zero', {breaks: true});
 
 md.enable('hr');
 md.enable('paragraph');
-md.enable('image');
 md.enable('newline');
 md.enable('heading');
 md.enable('lheading');
