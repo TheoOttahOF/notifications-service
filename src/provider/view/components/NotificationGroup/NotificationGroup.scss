@@ -1,4 +1,5 @@
 @import '../../styles/_variables.scss';
+@import '../../styles/animations.scss';
 
 .group {
     align-self: center;
@@ -62,46 +63,4 @@
     animation: fadeOutLeft 300ms ease-in;
     perspective: 1000;
     pointer-events: none;
-}
-
-
-@keyframes grow {
-    from {
-        opacity: 0;
-        // transform: scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        // transform: scale(1);
-    }
-}
-
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translate3d(-50%, 0, 0);
-    }
-
-    to {
-        opacity: 1;
-        transform: none;
-    }
-}
-
-@keyframes fadeOutLeft {
-    0% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-    }
-
-    20% {
-        transform: translateX(-20px);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translate3d(200%, 0, 0);
-        perspective: 1000;
-    }
 }

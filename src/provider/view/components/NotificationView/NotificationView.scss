@@ -1,4 +1,5 @@
 @import '../../styles/_variables.scss';
+@import '../../styles/animations.scss';
 
 .view {
     height: 100%;
@@ -38,15 +39,5 @@
 
     .group-item-enter-active {
         animation: fadeIn 300ms ease-in forwards;
-    }
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
     }
 }
