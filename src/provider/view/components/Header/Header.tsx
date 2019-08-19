@@ -18,25 +18,9 @@ interface HeaderProps extends Actionable {
 
 export function Header(props: HeaderProps): React.ReactElement {
     const {groupBy, visible, handleGroupBy, onClearAll, storeDispatch} = props;
-    const [clearAllPromptVisible, setClearAllPromptVisible] = React.useState(false);
     const handleHideWindow = () => {
         storeDispatch(new ToggleVisibility(false));
     };
-
-    const handleClearAll = () => {
-        onClearAll();
-        toggleClearAll();
-    };
-
-    const toggleClearAll = () => {
-        setClearAllPromptVisible(!clearAllPromptVisible);
-    };
-
-    React.useEffect(() => {
-        if (!visible) {
-            setClearAllPromptVisible(false);
-        }
-    }, [visible]);
 
     return (<div className="header">
         <div className="title">
@@ -65,10 +49,7 @@ export function Header(props: HeaderProps): React.ReactElement {
                     })
                 }
             </ul>
-            <span className="clear detail" onClick={toggleClearAll}>
-                Clear all
-            </span>
-            <ClearAllPrompt visible={clearAllPromptVisible} onAccept={handleClearAll} onCancel={toggleClearAll} />
+            <ClearAllPrompt centerVisible={visible} onAccept={onClearAll} />
         </div>
     </div>);
 }

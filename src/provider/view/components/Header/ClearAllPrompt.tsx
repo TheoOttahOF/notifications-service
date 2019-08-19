@@ -5,31 +5,56 @@ import {CircleButton} from '../CircleButton/CircleButton';
 import './ClearAllPrompt.scss';
 
 interface Props {
-    visible: boolean;
+    centerVisible: boolean;
     onAccept: () => void;
-    onCancel: () => void;
+    onCancel?: () => void;
 }
 
 export function ClearAllPrompt(props: Props) {
-    const {visible, onAccept, onCancel} = props;
+    const {onAccept, onCancel, centerVisible} = props;
+    const [clearAllPromptVisible, setClearAllPromptVisible] = React.useState(false);
+    const [mouseDown, setMouseDown] = React.useState(false);
     const divRef = React.createRef<HTMLDivElement>();
 
-    React.useEffect(() => {
-        if (visible)
-            divRef.current!.focus();
-    }, [visible]);
+    const togglePrompt = (visibility?: boolean, action?: () => void) => {
+        setClearAllPromptVisible(visibility || !clearAllPromptVisible);
+        if (action)
+            action();
+    };
 
+    const handleBlur = () => {
+        if (!mouseDown) {
+            togglePrompt(false);
+        }
+    };
+
+    React.useEffect(() => {
+        if (!centerVisible) {
+            setClearAllPromptVisible(false);
+        }
+        if (clearAllPromptVisible)
+            divRef.current!.focus();
+    }, [clearAllPromptVisible, centerVisible]);
+
+    /*
+    Blur and click event both fire when trying to close the prompt by clicking "Clear All".
+    To prevent this we have to track if the mouse is down and ignore the blur.
+    Events are ordered: MouseDown, Blur, MouseUp, Click
+    */
     return (
-        <CSSTransition
-            in={visible}
-            timeout={200}
-            classNames="animate"
-            unmountOnExit
-        >
-            <div tabIndex={0} className="prompt" ref={divRef} onBlur={onCancel}>
-                <CircleButton type="cancel" onClick={onCancel} />
-                <CircleButton type="accept" onClick={onAccept} />
-            </div>
-        </CSSTransition>
+        <span className="clear detail" onMouseDown={() => setMouseDown(true)} onMouseUp={() => setMouseDown(false)} onClick={() => togglePrompt()}>
+            Clear all
+            <CSSTransition
+                in={clearAllPromptVisible}
+                timeout={200}
+                classNames="animate"
+                unmountOnExit
+            >
+                <div tabIndex={0} className="prompt" ref={divRef} onBlur={handleBlur}>
+                    <CircleButton type="cancel" onClick={() => togglePrompt(false, onCancel)} />
+                    <CircleButton type="accept" onClick={() => togglePrompt(false, onAccept)} />
+                </div>
+            </CSSTransition>
+        </span>
     );
 }

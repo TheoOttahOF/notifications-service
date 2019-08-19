@@ -3,11 +3,11 @@
 .prompt {
     $max-height: 50px;
     $duration: 200ms;
-    width: 110px;
+    width: 120px;
     height: auto;
     background: var(--strip-background-color);
     position: absolute;
-    right: 0%;
+    right: -25px;
     top: 100%;
     display: flex;
     align-content: space-around;
