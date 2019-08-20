@@ -1,38 +1,20 @@
 import * as React from 'react';
-import moment from 'moment';
+
+import {getDate} from '../../utils/Time';
 
 export interface NotificationTimeProps {
     date: number;
 }
 
-moment.locale('en', {
-    relativeTime: {
-        future: 'in %s',
-        past: '%s ago',
-        s: 'seconds',
-        ss: '%ss',
-        m: 'a minute',
-        mm: '%dm',
-        h: 'an hour',
-        hh: '%dh',
-        d: 'a day',
-        dd: '%dd',
-        M: 'a month',
-        MM: '%dM',
-        y: 'a year',
-        yy: '%dY'
-    }
-});
-
 export function NotificationTime(props: NotificationTimeProps) {
     const {date} = props;
 
-    const [formattedDate, setFormattedDate] = React.useState<string>(moment(date).fromNow());
+    const [formattedDate, setFormattedDate] = React.useState<string>(getDate(date));
 
     // Update timestamp
     React.useEffect(() => {
         const timer = setInterval(() => {
-            setFormattedDate(moment(date).fromNow());
+            setFormattedDate(getDate(date));
         }, 1000 * 60);
 
         return () => {

@@ -27,6 +27,13 @@
         max-height: 100px !important;
     }
 
+    &.toast {
+        box-shadow: none;
+        &:hover{
+            box-shadow: none;
+        }
+    }
+
     .loading-screen {
         position: absolute;
         display: flex;
