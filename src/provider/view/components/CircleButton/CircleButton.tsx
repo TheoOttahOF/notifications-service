@@ -4,14 +4,6 @@ import './CircleButton.scss';
 
 type IconType = 'accept' | 'cancel' | 'close' | 'hide' | 'pin';
 
-const IconMap = {
-    'accept': 'check',
-    'cancel': 'times',
-    'close': 'times',
-    'hide': 'angle-right',
-    'pin': 'thumbtack'
-};
-
 interface Props {
     onClick?: () => void;
     type: IconType;
@@ -35,8 +27,7 @@ export function CircleButton(props: Props) {
 
     return (
         <div className={`icon ${type} ${size}`} onClick={handleClick}>
-            <div className="wrapper">
-                <i className={`fas fa-${IconMap[type]}`} aria-hidden="true" />
+            <div className="image">
             </div>
         </div>
     );

@@ -121,13 +121,16 @@
 
             .actions {
                 display: none;
-                color: var(--card-background-color);
 
                 .icon {
-                    margin-right: -3px;
-                    $size: 22px;
+                    // margin-right: -5px;
+                    $size: 18px;
                     width: $size;
                     height: $size;
+
+                    .image {
+                        background-color: var(--card-background-color);
+                    }
                 }
             }
         }
