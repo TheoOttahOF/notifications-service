@@ -1,14 +1,10 @@
 import React from 'react';
 
 interface Props {
-    text: string;
+    text?: string;
     icon?: string;
     onClick?: () => void;
 }
-
-Button.defaultProps = {
-    text: 'Open'
-};
 
 export function Button(props: Props) {
     const {text, icon, onClick} = props;

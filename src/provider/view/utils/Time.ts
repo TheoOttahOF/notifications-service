@@ -1,6 +1,8 @@
-import moment = require('moment');
+// require because this is imported by the tests
+// which have esModuleIntrop = false
+const moment = require('moment');
 
-moment.locale('en', {
+moment.updateLocale('en', {
     relativeTime: {
         future: 'in %s',
         past: '%s ago',

@@ -43,7 +43,8 @@ export function NotificationCard(props: Props) {
     return (
         <div
             className={`notification-card no-select ${isToast ? 'toast' : ''} ${loading ? 'loading' : ''}`}
-            onClick={handleNotificationClick} data-id={notification.id}
+            onClick={handleNotificationClick}
+            data-id={notification.id}
         >
             <div className="header">
                 <div className="app-icon" style={{backgroundImage: `url(${data.icon})`}}></div>
