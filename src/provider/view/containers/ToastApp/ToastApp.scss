@@ -1,4 +1,7 @@
+@import '../../styles/variables';
+
 #toast-container {
+    background: var(--card-background-color);
     margin: 0;
     display: inline-block;
     user-select: none;
