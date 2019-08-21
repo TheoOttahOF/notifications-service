@@ -41,7 +41,7 @@ export async function assertDOMMatches(type: CardType, sourceUuid: string, note:
     if (noteCards.length > 1) {
         throw new Error(`Multiple notification cards found for the given UUID/ID pair: ${sourceUuid}/${note.id}`);
     }
-    
+
     const expectedMetadata: NotificationCardMetadata = {
         title: note.title,
         body: renderMarkdown(note.body),
@@ -105,12 +105,8 @@ async function getStyleBySelector(rootElement: ElementHandle, selectorString: st
     const style = await (await queryElement.getProperty('style'));
     const styleProp = await style.getProperty(styleAttribute);
     let value: string = await styleProp.jsonValue() || '';
-    if (value.search(/url/)) {
-        const uriRegex = /\(\\?['"]?(.*?)\\?['"]?\)/;
-        const matches = uriRegex.exec(value);
-        value = matches![1];
-        console.log(matches);
-    }
+    // strip url(\"\") from strings
+    value = value.match(/\((.*?)\)/)![1].replace(/('|")/g, '');
 
     return value;
 }
