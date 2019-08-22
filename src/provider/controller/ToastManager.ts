@@ -66,7 +66,7 @@ export class ToastManager extends AsyncInit {
         }
 
         const toast: Toast = new Toast(this._store, notification, {
-            timeout: 1000000
+            timeout: 10000
         });
 
         this._toasts.set(id, toast);
