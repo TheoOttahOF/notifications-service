@@ -8,7 +8,7 @@ import {StoredNotification} from '../../../model/StoredNotification';
 
 import './NotificationView.scss';
 
-interface NotificationViewProps extends Actionable {
+interface Props extends Actionable {
     notifications: StoredNotification[];
     groupBy: GroupingType;
 }
@@ -21,7 +21,7 @@ interface NotificationViewProps extends Actionable {
  * the only input is a flat list of all notifications.
  * @param props Props
  */
-export function NotificationView(props: NotificationViewProps) {
+export function NotificationView(props: Props) {
     const {notifications, groupBy, ...rest} = props;
     const [groups, setGroups] = React.useState<Map<string, Group>>(new Map());
 

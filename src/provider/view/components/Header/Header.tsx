@@ -9,14 +9,14 @@ import {ClearAllPrompt} from './ClearAllPrompt';
 
 import './Header.scss';
 
-interface HeaderProps extends Actionable {
+interface Props extends Actionable {
     visible: boolean;
     groupBy: GroupingType;
     handleGroupBy: (groupBy: GroupingType) => void;
     onClearAll: () => void;
 }
 
-export function Header(props: HeaderProps): React.ReactElement {
+export function Header(props: Props): React.ReactElement {
     const {groupBy, visible, handleGroupBy, onClearAll, storeDispatch} = props;
     const handleHideWindow = () => {
         storeDispatch(new ToggleVisibility(false));
@@ -25,7 +25,7 @@ export function Header(props: HeaderProps): React.ReactElement {
     return (<div className="header">
         <div className="title">
             <div>
-                {/* <span className="count">(13214)</span> */}
+                {/* Layoutspace and in the future place filter/settings here */}
             </div>
             <CircleButton type="hide" size="large" onClick={handleHideWindow} />
         </div>

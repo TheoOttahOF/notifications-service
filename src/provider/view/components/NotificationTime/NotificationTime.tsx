@@ -2,11 +2,11 @@ import * as React from 'react';
 
 import {getDate} from '../../utils/Time';
 
-export interface NotificationTimeProps {
+interface Props {
     date: number;
 }
 
-export function NotificationTime(props: NotificationTimeProps) {
+export function NotificationTime(props: Props) {
     const {date} = props;
 
     const [formattedDate, setFormattedDate] = React.useState<string>(getDate(date));
