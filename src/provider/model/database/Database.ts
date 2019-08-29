@@ -22,9 +22,8 @@ export class Database extends AsyncInit {
     private _database: Dexie;
     private _collections: Map<CollectionMap, Collection<any>>;
 
-    constructor () {
+    constructor() {
         super();
-
         this._database = new Dexie('notifications-service');
         this._collections = new Map<CollectionMap, Collection<any>>();
 

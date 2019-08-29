@@ -31,19 +31,17 @@ export class Store extends AsyncInit implements StoreAPI {
 
     public readonly onAction: Signal<[RootAction], Promise<void>> = new Signal(Aggregators.AWAIT_VOID);
 
-    private readonly _database: Database;
     private _actionHandlerMap: ActionHandlerMap;
     private _store!: ReduxStore<RootState, RootAction>;
+    private _database!: Database;
 
     constructor(@inject(Inject.ACTION_HANDLER_MAP) actionHandlerMap: ActionHandlerMap, @inject(Inject.DATABASE) database: Database) {
         super();
-
-        this._database = database;
         this._actionHandlerMap = actionHandlerMap;
+        this._database = database;
     }
 
     protected async init(): Promise<void> {
-        await this._database.initialized;
         this._store = createStore<RootState, RootAction, {}, {}>(this.reduce.bind(this), await this.getInitialState(), this.createEnhancer());
     }
 
@@ -114,7 +112,8 @@ export class Store extends AsyncInit implements StoreAPI {
     }
 
     private async getInitialState(): Promise<RootState> {
-        const notificationCollection: Collection<StoredNotification> = this._database.get(CollectionMap.NOTIFICATIONS);
+        const database = this._database;
+        const notificationCollection: Collection<StoredNotification> = database.get(CollectionMap.NOTIFICATIONS);
         const notifications: StoredNotification[] = await notificationCollection.getAll();
 
         return Object.assign({}, Store.INITIAL_STATE, {notifications});

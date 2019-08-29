@@ -5,6 +5,7 @@ import {APITopic, Events} from '../../client/internal';
 import {AsyncInit} from '../controller/AsyncInit';
 import {NotificationCenter} from '../controller/NotificationCenter';
 import {ToastManager} from '../controller/ToastManager';
+import {DatabaseMiddleware} from '../controller/DatabaseMiddleware';
 import {Layouter} from '../controller/Layouter';
 import {APIHandler} from '../model/APIHandler';
 import {ActionHandlerMap, ActionHandlers} from '../store/Actions';
@@ -23,6 +24,7 @@ type Types = {
     [Inject.LAYOUTER]: Layouter;
     [Inject.NOTIFICATION_CENTER]: NotificationCenter;
     [Inject.DATABASE]: Database;
+    [Inject.DATABASE_MIDDLEWARE]: DatabaseMiddleware;
     [Inject.STORE]: Store;
     [Inject.TOAST_MANAGER]: ToastManager;
 };
@@ -39,6 +41,7 @@ const Bindings = {
     [Inject.LAYOUTER]: Layouter,
     [Inject.NOTIFICATION_CENTER]: NotificationCenter,
     [Inject.DATABASE]: Database,
+    [Inject.DATABASE_MIDDLEWARE]: DatabaseMiddleware,
     [Inject.LAYOUTER]: Layouter,
     [Inject.STORE]: Store,
     [Inject.TOAST_MANAGER]: ToastManager
