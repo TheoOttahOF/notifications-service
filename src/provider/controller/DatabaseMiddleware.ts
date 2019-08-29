@@ -19,13 +19,28 @@ export class DatabaseMiddleware {
     private async onAction(action: RootAction): Promise<void> {
         if (action.type === Action.CREATE) {
             const {notification} = action;
-
-            this._database.get(CollectionMap.NOTIFICATIONS).upsert(notification);
+            try {
+                // throw new Error('Failed');
+                await this._database.get(CollectionMap.NOTIFICATIONS).upsert(notification);
+            } catch (error) {
+                throw new DatabaseWriteError(`Unable to upsert ${notification.id}`, error);
+            }
         }
         if (action.type === Action.REMOVE) {
             const {notifications} = action;
             const ids = notifications.map(note => note.id);
-            this._database.get(CollectionMap.NOTIFICATIONS).delete(ids);
+            try {
+                await this._database.get(CollectionMap.NOTIFICATIONS).delete(ids);
+            } catch (error) {
+                throw new DatabaseWriteError(`Unable to delete ${ids}`, error);
+            }
         }
+    }
+}
+
+class DatabaseWriteError extends Error {
+    constructor(message?: string, innerError?: Error) {
+        super(`${message}\n\t${innerError}`);
+        Object.setPrototypeOf(this, new.target.prototype);
     }
 }
