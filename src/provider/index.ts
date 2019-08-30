@@ -13,7 +13,6 @@ import {ActionTrigger} from '../client/actions';
 import {Injector} from './common/Injector';
 import {Inject} from './common/Injectables';
 import {NotificationCenter} from './controller/NotificationCenter';
-import {DatabaseMiddleware} from './controller/DatabaseMiddleware';
 import {ToastManager} from './controller/ToastManager';
 import {APIHandler} from './model/APIHandler';
 import {StoredNotification} from './model/StoredNotification';
@@ -41,9 +40,6 @@ export class Main {
     @inject(Inject.DATABASE)
     private _database!: Database;
 
-    @inject(Inject.DATABASE_MIDDLEWARE)
-    private _databaseMiddleware!: DatabaseMiddleware;
-
     public async register(): Promise<void> {
         Object.assign(window, {
             main: this,
@@ -51,12 +47,11 @@ export class Main {
             store: this._store,
             center: this._notificationCenter,
             toast: this._toastManager,
-            database: this._database,
-            databaseMiddleware: this._databaseMiddleware
+            database: this._database
         });
 
         // Wait for creation of any injected components that require async initialization
-        await Injector.initialized;
+        await Injector.init();
 
         // Current API
         this._apiHandler.registerListeners<API>({

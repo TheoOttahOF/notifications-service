@@ -8,6 +8,7 @@ import {StoredNotification} from '../model/StoredNotification';
 import {Database, CollectionMap} from '../model/database/Database';
 import {AsyncInit} from '../controller/AsyncInit';
 import {Collection} from '../model/database/Collection';
+import {Injector} from '../common/Injector';
 
 import {ActionHandlerMap, ActionHandler, RootAction, Action, ActionOf, CustomAction} from './Actions';
 import {RootState} from './State';
@@ -35,13 +36,14 @@ export class Store extends AsyncInit implements StoreAPI {
     private _store!: ReduxStore<RootState, RootAction>;
     private _database!: Database;
 
-    constructor(@inject(Inject.ACTION_HANDLER_MAP) actionHandlerMap: ActionHandlerMap, @inject(Inject.DATABASE) database: Database) {
+    constructor(@inject(Inject.ACTION_HANDLER_MAP) actionHandlerMap: ActionHandlerMap) {
         super();
         this._actionHandlerMap = actionHandlerMap;
-        this._database = database;
     }
 
     protected async init(): Promise<void> {
+        this._database = Injector.get(Inject.DATABASE) as Database;
+        await this._database.initialized;
         this._store = createStore<RootState, RootAction, {}, {}>(this.reduce.bind(this), await this.getInitialState(), this.createEnhancer());
     }
 

@@ -5,7 +5,6 @@ import {APITopic, Events} from '../../client/internal';
 import {AsyncInit} from '../controller/AsyncInit';
 import {NotificationCenter} from '../controller/NotificationCenter';
 import {ToastManager} from '../controller/ToastManager';
-import {DatabaseMiddleware} from '../controller/DatabaseMiddleware';
 import {Layouter} from '../controller/Layouter';
 import {APIHandler} from '../model/APIHandler';
 import {ActionHandlerMap, ActionHandlers} from '../store/Actions';
@@ -24,7 +23,6 @@ type Types = {
     [Inject.LAYOUTER]: Layouter;
     [Inject.NOTIFICATION_CENTER]: NotificationCenter;
     [Inject.DATABASE]: Database;
-    [Inject.DATABASE_MIDDLEWARE]: DatabaseMiddleware;
     [Inject.STORE]: Store;
     [Inject.TOAST_MANAGER]: ToastManager;
 };
@@ -41,7 +39,6 @@ const Bindings = {
     [Inject.LAYOUTER]: Layouter,
     [Inject.NOTIFICATION_CENTER]: NotificationCenter,
     [Inject.DATABASE]: Database,
-    [Inject.DATABASE_MIDDLEWARE]: DatabaseMiddleware,
     [Inject.LAYOUTER]: Layouter,
     [Inject.STORE]: Store,
     [Inject.TOAST_MANAGER]: ToastManager
@@ -54,6 +51,7 @@ type Keys = (keyof typeof Inject & keyof typeof Bindings & keyof Types);
  */
 export class Injector {
     private static _initialized: Promise<void>;
+    private static _ready: boolean = false;
 
     private static _container: Container = (() => {
         const container = new Container();
@@ -68,15 +66,6 @@ export class Injector {
                 container.bind(Inject[key]).toConstantValue(Bindings[key]);
             }
         });
-        Object.keys(Bindings).forEach(k => {
-            const key: Keys = k as any;
-            const proto = (Bindings[key] as Function).prototype;
-
-            if (proto && proto.hasOwnProperty('init')) {
-                const instance = (container.get(Inject[key]) as AsyncInit);
-                promises.push(instance.delayedInit());
-            }
-        });
 
         Injector._initialized = Promise.all(promises).then(() => {});
         return container;
@@ -84,6 +73,29 @@ export class Injector {
 
     public static get initialized(): Promise<void> {
         return this._initialized;
+    }
+
+    public static async init(): Promise<void> {
+        const container: Container = Injector._container;
+        const promises: Promise<unknown>[] = [];
+
+        Object.keys(Bindings).forEach(k => {
+            const key: Keys = k as any;
+            const proto = (Bindings[key] as Function).prototype;
+
+            if (proto && proto.hasOwnProperty('init')) {
+                const instance = (container.get(Inject[key]) as AsyncInit);
+                if (instance.delayedInit) {
+                    promises.push(instance.delayedInit());
+                }
+            }
+        });
+
+        Injector._initialized = Promise.all(promises).then(() => {
+            Injector._ready = true;
+        });
+
+        return Injector._initialized;
     }
 
     public static rebind<K extends Keys>(type: typeof Inject[K]): inversify.BindingToSyntax<Types[K]> {

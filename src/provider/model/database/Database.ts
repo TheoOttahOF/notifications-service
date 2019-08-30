@@ -1,9 +1,13 @@
-import {injectable} from 'inversify';
+import {injectable, inject} from 'inversify';
 import Dexie from 'dexie';
 
 import {StoredSetting} from '../StoredSetting';
 import {StoredNotification} from '../StoredNotification';
 import {AsyncInit} from '../../controller/AsyncInit';
+import {Store} from '../../store/Store';
+import {Inject} from '../../common/Injectables';
+import {RootAction, Action} from '../../store/Actions';
+import {DatabaseError} from '../../common/Errors';
 
 import {Collection} from './Collection';
 
@@ -21,6 +25,8 @@ export type Collections = {
 export class Database extends AsyncInit {
     private _database: Dexie;
     private _collections: Map<CollectionMap, Collection<any>>;
+    @inject(Inject.STORE)
+    private _store!: Store;
 
     constructor() {
         super();
@@ -37,6 +43,7 @@ export class Database extends AsyncInit {
 
     protected async init(): Promise<void> {
         await this._database.open();
+        this._store.onAction.add(this.onAction, this);
     }
 
     /**
@@ -57,5 +64,25 @@ export class Database extends AsyncInit {
         tables.forEach(table => {
             this._collections.set(table.name as CollectionMap, new Collection(table));
         });
+    }
+
+    private async onAction(action: RootAction): Promise<void> {
+        if (action.type === Action.CREATE) {
+            const {notification} = action;
+            try {
+                await this.get(CollectionMap.NOTIFICATIONS).upsert(notification);
+            } catch (error) {
+                throw new DatabaseError(`Unable to upsert ${notification.id}`, error);
+            }
+        }
+        if (action.type === Action.REMOVE) {
+            const {notifications} = action;
+            const ids = notifications.map(note => note.id);
+            try {
+                await this.get(CollectionMap.NOTIFICATIONS).delete(ids);
+            } catch (error) {
+                throw new DatabaseError(`Unable to delete ${ids}`, error);
+            }
+        }
     }
 }
