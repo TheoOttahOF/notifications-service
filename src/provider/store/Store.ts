@@ -7,13 +7,13 @@ import {AsyncInit} from '../controller/AsyncInit';
  */
 export interface StoreAPI<S, A> {
     state: S;
-    dispatch(action: A): Promise<A>;
+    dispatch(action: A): Promise<void>;
 }
 
 export abstract class Action<S> {
-    public readonly type: string;
+    public readonly type?: string;
 
-    constructor(type: string) {
+    constructor(type?: string) {
         this.type = type;
     }
 
@@ -30,8 +30,6 @@ export interface Reducer<S> {
     reduce(state: S): S;
 }
 
-type PostReductionAction = string;
-
 type Listener<S> = (getState: () => S) => void;
 
 export class Store<S, A extends Action<S>> extends AsyncInit implements StoreAPI<S, A> {
@@ -40,7 +38,7 @@ export class Store<S, A extends Action<S>> extends AsyncInit implements StoreAPI
 
     public readonly onAction: Signal<[A], Promise<void>, Promise<void>> = new Signal(Aggregators.AWAIT_VOID);
 
-    constructor(initialState: S, postReductionActions?: PostReductionAction[]) {
+    constructor(initialState: S) {
         super();
         this._currentState = initialState;
     }
@@ -55,13 +53,12 @@ export class Store<S, A extends Action<S>> extends AsyncInit implements StoreAPI
 
     protected async init(): Promise<void> {}
 
-    public async dispatch(action: A): Promise<A> {
+    public async dispatch(action: A): Promise<void> {
         if (action instanceof AsyncAction) {
             // Action has custom dispatch logic
             await action.dispatch(this);
         }
         this.reduceAndEmit(action);
-        return action;
     }
 
     public subscribe(listener: Listener<S>) {

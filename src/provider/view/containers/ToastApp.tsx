@@ -7,10 +7,9 @@ import {NotificationCard} from '../components/NotificationCard/NotificationCard'
 import {WindowDimensions} from '../../controller/Layouter';
 import {RootState} from '../../store/State';
 import {ServiceStore} from '../../store/ServiceStore';
+import {Action} from '../../store/Store';
 
 import {Actionable} from './NotificationCenterApp';
-import { Store } from '../../store/Store';
-import { RootAction } from '../../store/Actions';
 
 interface ToastAppProps extends Actionable {
     notification: StoredNotification;
@@ -53,9 +52,14 @@ const mapStateToProps = (state: RootState, ownProps: ToastAppProps) => ({
 
 const Container = connect(mapStateToProps)(ToastApp);
 
-export function renderApp(notification: StoredNotification, document: Document, store: Store<RootState, RootAction>, setWindowSize: (dim: WindowDimensions) => void) {
+export function renderApp(
+    notification: StoredNotification,
+    document: Document,
+    store: ServiceStore,
+    setWindowSize: (dim: WindowDimensions) => void
+) {
     ReactDOM.render(
-        <Provider store={store}>
+        <Provider store={store as any}>
             <Container storeDispatch={store.dispatch.bind(store)} notification={notification} setWindowSize={setWindowSize} />
         </Provider>,
         document.getElementById('react-app')

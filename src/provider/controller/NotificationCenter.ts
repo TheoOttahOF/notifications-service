@@ -6,8 +6,8 @@ import {Inject} from '../common/Injectables';
 import {TrayIcon} from '../common/TrayIcon';
 import {WebWindow, createWebWindow} from '../model/WebWindow';
 import {ToggleVisibility} from '../store/Actions';
-import {Store} from '../store/Store';
 import {renderApp} from '../view/containers/NotificationCenterApp';
+import {ServiceStore} from '../store/ServiceStore';
 
 import {AsyncInit} from './AsyncInit';
 
@@ -33,7 +33,7 @@ export class NotificationCenter extends AsyncInit {
     private static readonly WIDTH: number = 388;
 
     @inject(Inject.STORE)
-    private _store!: Store;
+    private _store!: ServiceStore;
 
     private _webWindow!: WebWindow;
     private _trayIcon!: TrayIcon;
@@ -65,10 +65,7 @@ export class NotificationCenter extends AsyncInit {
      */
     private subscribe(): void {
         // Window visibility
-        this._store.watchForChange(
-            state => state.windowVisible,
-            (_, value) => this.toggleWindow(value)
-        );
+
     }
 
     /**
