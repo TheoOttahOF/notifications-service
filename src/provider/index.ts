@@ -304,7 +304,17 @@ export class Main {
 }
 
 // Start service provider
-Injector.getClass(Main).register();
+const service = Injector.getClass(Main).register();
 
 // Register the offline-mode service worker.
 navigator.serviceWorker.register('./sw.js', {scope: './'});
+
+if (process.env.NODE_ENV === 'development') {
+    service.then(async () => {
+        try {
+            require('../custom/post');
+        } catch (error) {
+            console.log('No post file found.');
+        }
+    });
+}
