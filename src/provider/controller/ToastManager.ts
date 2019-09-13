@@ -120,11 +120,11 @@ export class ToastManager extends AsyncInit {
         }
 
         if (action instanceof RemoveNotifications) {
-            this.removeToasts(...action.notifications);
+            await this.removeToasts(...action.notifications);
         }
 
         if (action instanceof ToggleCenterVisibility) {
-            this.closeAll();
+            await this.closeAll();
         }
     }
 
