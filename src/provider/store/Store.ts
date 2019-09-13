@@ -30,6 +30,8 @@ type Listener<S> = (getState: () => S) => void;
 
 export class Store<S, A extends Action<S>> extends AsyncInit implements StoreAPI<S, A> {
     public readonly onAction: Signal<[A], Promise<void>, Promise<void>> = new Signal(Aggregators.AWAIT_VOID);
+    // Emitted when an action's listeners all resolve
+    public readonly onPostAction: Signal<[A, Error[]]> = new Signal();
 
     private _currentState: S;
     private readonly _listeners: Listener<S>[] = [];
@@ -50,7 +52,7 @@ export class Store<S, A extends Action<S>> extends AsyncInit implements StoreAPI
         return this._currentState;
     }
 
-    public async dispatch(action: A): Promise<void> {
+    public dispatch(action: A): Promise<void> {
         return this.reduceAndSignal(action);
     }
 
@@ -74,12 +76,19 @@ export class Store<S, A extends Action<S>> extends AsyncInit implements StoreAPI
     private reduceAndSignal(action: A): Promise<void> {
         // emit signal last
         this.reduce(action);
-        return this.onAction.emit(action);
+        const signaledAction = this.onAction.emit(action);
+        this.post(action, signaledAction);
+        return signaledAction;
     }
 
     private reduce(action: A): void {
         this._currentState = action.reduce(this.state);
         this._listeners.forEach(listener => listener(() => this._currentState));
+    }
+
+    private async post(action: A, signaledAction: Promise<void>): Promise<void> {
+        const result = await signaledAction;
+        this.onPostAction.emit(action, []);
     }
 
     // intended to be used by react-redux only
