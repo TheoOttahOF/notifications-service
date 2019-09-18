@@ -6,6 +6,7 @@ import {StoredNotification} from '../../../model/StoredNotification';
 import {CircleButton, IconType} from '../CircleButton/CircleButton';
 import {RemoveNotifications, ClickButton, ClickNotification, Actionable, MinimizeToast} from '../../../store/Actions';
 import {useOnClickOnly} from '../../hooks/Clicks';
+import {ClassNames} from '../../utils/ClassNames';
 
 import {Body} from './Body';
 import {Loading} from './Loading';
@@ -28,6 +29,7 @@ export function NotificationCard(props: Props) {
     const [loading] = React.useState(false);
     const cardRef = React.createRef<HTMLDivElement>();
     const [validClick, finishedClick] = useOnClickOnly(cardRef);
+    const [interactable, setInteractable] = React.useState(true);
 
     const handleNotificationClose = () => {
         new RemoveNotifications([notification]).dispatch(storeApi);
@@ -40,13 +42,17 @@ export function NotificationCard(props: Props) {
     };
 
     const handleButtonClick = async (buttonIndex: number) => {
-        new ClickButton(notification, buttonIndex).dispatch(storeApi);
+        console.log('CLICK');
+        return;
+        // new ClickButton(notification, buttonIndex).dispatch(storeApi);
     };
 
     const handleNotificationClick = async (event: React.MouseEvent) => {
         event.stopPropagation();
         event.preventDefault();
         // Check if the click did not originate from a button
+        // This is to prevent a user clicking a button and holding their mouse down
+        // dragging onto the body and letting go
         if (!validClick) {
             return;
         }
@@ -54,9 +60,11 @@ export function NotificationCard(props: Props) {
         finishedClick();
     };
 
+    const classNames = new ClassNames('notification-card', 'no-select', ['loading', loading], ['toast', isToast]);
+
     return (
         <div
-            className={`notification-card no-select ${isToast ? 'toast' : ''} ${loading ? 'loading' : ''}`}
+            className={classNames.toString()}
             onClick={handleNotificationClick}
             data-id={notification.id}
             ref={cardRef}
@@ -68,7 +76,7 @@ export function NotificationCard(props: Props) {
                     <NotificationTime date={data.date} />
                     <div className="actions">
                         {isToast &&
-                            <CircleButton type={IconType.MINIMIZE} onClick={handleNotificationDismiss} alt="Dismiss toast" />
+                            <CircleButton type={IconType.MINIMIZE} onClick={handleNotificationDismiss} alt="Minimize Toast" />
                         }
                         <CircleButton type={IconType.CLOSE} onClick={handleNotificationClose} alt="Clear notification" />
                     </div>
