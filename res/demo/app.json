@@ -16,7 +16,7 @@
         }
     ],
     "runtime": {
-        "version": "13.76.44.21"
+        "version": "canary"
     },
     "shortcut": {}
 }

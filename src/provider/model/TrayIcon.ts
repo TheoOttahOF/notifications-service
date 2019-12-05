@@ -6,6 +6,6 @@ export interface TrayIcon {
     readonly onRightClick: Signal<[]>;
 
     setIcon(url: string): Promise<void>;
-
+    setBadgeCount(count: number): Promise<void>;
     getInfo(): Promise<TrayInfo>;
 }
