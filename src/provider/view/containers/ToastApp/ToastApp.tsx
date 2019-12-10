@@ -12,6 +12,7 @@ import {WebWindow} from '../../../model/WebWindow';
 import {ServiceStore} from '../../../store/ServiceStore';
 import {TitledNotification, Actionable} from '../../types';
 import {WindowProvider, WindowContext} from '../../components/Wrappers/WindowContext';
+import {ThemeProvider} from '../../theme/ThemeContext';
 
 import '../../styles/base.scss';
 import './ToastApp.scss';
@@ -59,7 +60,9 @@ export function renderApp(
         // This will resolve the interface incompatibility issues.
         <Provider store={store as unknown as Store<RootState>}>
             <WindowProvider value={webWindow.nativeWindow}>
-                <Container storeApi={store} notification={titledNotification} setWindowSize={setWindowSize} />
+                <ThemeProvider>
+                    <Container storeApi={store} notification={titledNotification} setWindowSize={setWindowSize} />
+                </ThemeProvider>
             </WindowProvider>
         </Provider>,
         webWindow.document.getElementById('react-app')

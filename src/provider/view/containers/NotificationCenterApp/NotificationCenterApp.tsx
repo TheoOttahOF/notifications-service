@@ -15,6 +15,7 @@ import {WindowProvider, WindowContext} from '../../components/Wrappers/WindowCon
 
 import '../../styles/_main.scss';
 import './NotificationCenterApp.scss';
+import {ThemeProvider} from '../../theme/ThemeContext';
 
 type Props = ReturnType<typeof mapStateToProps> & Actionable;
 
@@ -71,7 +72,9 @@ export function renderApp(webWindow: WebWindow, store: ServiceStore): void {
         // This will resolve the interface incompatibility issues.
         <Provider store={store as unknown as Store<RootState>}>
             <WindowProvider value={webWindow.nativeWindow}>
-                <Container storeApi={store} />
+                <ThemeProvider>
+                    <Container storeApi={store} />
+                </ThemeProvider>
             </WindowProvider>
         </Provider>,
         webWindow.document.getElementById('react-app')

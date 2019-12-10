@@ -5,7 +5,7 @@
     vertical-align: middle;
     user-select: none;
     cursor: pointer;
-    border-right: 1px var(--card-border-color) solid;
+    border-right: 1px var(--color-light) solid;
     transition: background-color 0.1s ease-in-out;
     line-height: 16px;
     align-content: center;
@@ -17,7 +17,7 @@
 
     &:hover {
         transition: background-color 0.2s ease-in-out;
-        background-color: var(--card-border-color);
+        background-color: var(--color-light);
         box-shadow: none;
         transition: box-shadow 0.1s ease-out;
 

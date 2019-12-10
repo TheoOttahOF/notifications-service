@@ -3,7 +3,7 @@
 .notification-card {
     width: 340px;
     align-self: center;
-    background: var(--card-background-color);
+    background: var(--color-background-light);
     overflow: hidden;
     transition: box-shadow 0.2s ease-in-out;
     color: white;
@@ -11,10 +11,10 @@
 
     &:not(.toast) {
         border-radius: 7px;
-        box-shadow: 0px 0px 0px 1px var(--card-border-color);
+        box-shadow: 0px 0px 0px 1px var(--color-light);
 
         &:hover {
-            box-shadow: 0px 0px 0px 2px var(--accent-color);
+            box-shadow: 0px 0px 0px 2px var(--color-accent);
         }
     }
 
@@ -113,7 +113,7 @@
             display: inline-block;
             flex: 1 1 1;
             flex-direction: row;
-            color: var(--secondary-text-color);
+            color: var(--text-secondary-color);
             padding-left: 8px;
 
             &>* {
@@ -136,10 +136,10 @@
                     width: $size;
                     height: $size;
                     margin-right: 8px;
-                    background-color: var(--secondary-text-color);
+                    background-color: var(--text-secondary-color);
 
                     .image {
-                        background-color: var(--card-background-color);
+                        background-color: var(--color-background-light);
                     }
 
                     &.minimize:hover {
@@ -171,6 +171,6 @@
         display: flex;
         justify-content: space-around;
         flex-direction: row;
-        border-top: var(--card-border-color) solid 1px;
+        border-top: var(--color-light) solid 1px;
     }
 }

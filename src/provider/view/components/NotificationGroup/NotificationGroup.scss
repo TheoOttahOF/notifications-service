@@ -9,7 +9,7 @@
     &>.title {
         position: relative;
         font-size: 20px;
-        color: var(--primary-text-color);
+        color: var(--text-primary-color);
         text-transform: capitalize;
         padding: 6px 0;
         margin-bottom: 5px;
@@ -36,8 +36,8 @@
             }
 
             .count {
-                color: var(--center-background-color);
-                background: var(--accent-color);
+                color: var(--color-background-normal);
+                background: var(--color-accent);
                 display: inline-block;
                 flex: 0 -1 0;
                 flex-direction: row;
@@ -63,7 +63,7 @@
             background: none;
 
             &:hover .image {
-                background-color: var(--accent-color-highlight);
+                background-color: var(--color-accent-highlight);
             }
         }
     }
