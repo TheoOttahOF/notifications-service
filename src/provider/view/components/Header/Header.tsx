@@ -21,7 +21,7 @@ interface Props extends Actionable {
 export function Header(props: Props): React.ReactElement {
     const {groupBy, centerVisible, handleGroupBy, centerLocked, onClearAll, storeApi} = props;
     const handleHideWindow = () => {
-        new ToggleCenterVisibility(ToggleCenterVisibilitySource.BUTTON, false).dispatch(storeApi);
+        storeApi.dispatch(new ToggleCenterVisibility(ToggleCenterVisibilitySource.BUTTON, false));
     };
 
     return (
@@ -69,7 +69,7 @@ function Lock(props: LockProps): React.ReactElement {
     const {storeApi, centerLocked} = props;
 
     const handleLockWindow = () => {
-        new ToggleLockCenter().dispatch(storeApi);
+        storeApi.dispatch(new ToggleLockCenter());
     };
 
     return <a id="lock-link" onClick={handleLockWindow}>{centerLocked ? '🔒' : '🔓'}</a>;

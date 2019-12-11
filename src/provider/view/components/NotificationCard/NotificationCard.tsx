@@ -40,13 +40,13 @@ export function NotificationCard(props: Props) {
 
     const handleNotificationClose = async () => {
         setUninteractable(true);
-        await new RemoveNotifications([notification]).dispatch(storeApi);
+        await storeApi.dispatch(new RemoveNotifications([notification]));
     };
 
     const handleNotificationMinimize = async () => {
         if (isToast) {
             setUninteractable(true);
-            await new MinimizeToast(notification).dispatch(storeApi);
+            await storeApi.dispatch(new MinimizeToast(notification));
         }
     };
 
@@ -54,7 +54,7 @@ export function NotificationCard(props: Props) {
         setUninteractable(true);
         try {
             // TODO: [SERVICE-605] set loading state
-            await new ClickButton(notification, buttonIndex).dispatch(storeApi);
+            await storeApi.dispatch(new ClickButton(notification, buttonIndex));
         } catch (error) {
             handleError(error);
         }
@@ -72,7 +72,7 @@ export function NotificationCard(props: Props) {
         setUninteractable(true);
         try {
             // TODO: [SERVICE-605] set loading state
-            await new ClickNotification(notification).dispatch(storeApi);
+            await storeApi.dispatch(new ClickNotification(notification));
         } catch (error) {
             handleError(error);
         }

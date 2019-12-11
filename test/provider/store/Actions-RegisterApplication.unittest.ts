@@ -24,7 +24,7 @@ beforeEach(() => {
 test('When registering an application, the application is added to the store', async () => {
     const storedApplication = createFakeStoredApplication();
 
-    await (new RegisterApplication(storedApplication)).dispatch(mockServiceStore);
+    await mockServiceStore.dispatch(new RegisterApplication(storedApplication));
 
     expect(state.applications.get(storedApplication.id)).toEqual(storedApplication);
 });

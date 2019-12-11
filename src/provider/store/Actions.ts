@@ -43,16 +43,16 @@ export class CreateNotification extends Action<RootState> {
         };
     }
 
-    public async dispatch(store: StoreAPI<RootState>): Promise<void> {
+    public async call(store: StoreAPI<RootState>, complete: () => Promise<void>): Promise<void> {
         const notification = this.notification;
         const promises = [];
         // First remove any existing notifications with this ID, to ensure ID uniqueness
         // Should only ever be at-most one notification with this ID, using filter over find as an additional sanity check
         const existingNotifications = store.state.notifications.filter((x) => x.id === notification.id);
         if (existingNotifications.length) {
-            promises.push(new RemoveNotifications(existingNotifications).dispatch(store));
+            promises.push(store.dispatch(new RemoveNotifications(existingNotifications)));
         }
-        promises.push(super.dispatch(store));
+        promises.push(complete());
         await Promise.all(promises);
     }
 }
@@ -88,8 +88,8 @@ export class ClickNotification extends Action<RootState> {
         this.notification = notification;
     }
 
-    public async dispatch(store: StoreAPI<RootState>): Promise<void> {
-        await Promise.all([super.dispatch(store), new RemoveNotifications([this.notification]).dispatch(store)]);
+    public async call(store: StoreAPI<RootState>, complete: () => Promise<void>): Promise<void> {
+        await Promise.all([complete(), store.dispatch(new RemoveNotifications([this.notification]))]);
     }
 }
 
@@ -104,8 +104,8 @@ export class ClickButton extends Action<RootState> {
         this.buttonIndex = buttonIndex;
     }
 
-    public async dispatch(store: StoreAPI<RootState>): Promise<void> {
-        await Promise.all([super.dispatch(store), new RemoveNotifications([this.notification]).dispatch(store)]);
+    public async call(store: StoreAPI<RootState>, complete: () => Promise<void>): Promise<void> {
+        await Promise.all([complete(), store.dispatch(new RemoveNotifications([this.notification]))]);
     }
 }
 
@@ -120,9 +120,9 @@ export class ToggleCenterVisibility extends Action<RootState> {
         this.visible = visible;
     }
 
-    public async dispatch(store: StoreAPI<RootState>): Promise<void> {
+    public async call(store: StoreAPI<RootState>, complete: () => Promise<void>): Promise<void> {
         if (toggleFilter.recordToggle(this.source)) {
-            await super.dispatch(store);
+            await complete();
         }
     }
 
@@ -139,11 +139,11 @@ export class ToggleCenterVisibility extends Action<RootState> {
 export class BlurCenter extends Action<RootState> {
     public readonly type = '@@CENTER/BLUR_CENTER';
 
-    public async dispatch(store: StoreAPI<RootState>): Promise<void> {
+    public async dispatch(store: StoreAPI<RootState>, complete: () => Promise<void>): Promise<void> {
         // TODO: We only need to check `recordBlur` here due to spurious blur events generated from windows in a different runtime. Investigate
         // Properly [SERVICE-614]
         if (toggleFilter.recordBlur()) {
-            await super.dispatch(store);
+            await complete();
         }
     }
 
@@ -194,8 +194,8 @@ export class ExpireNotification extends Action<RootState> {
         this.notification = notification;
     }
 
-    public async dispatch(store: StoreAPI<RootState>): Promise<void> {
-        await Promise.all([super.dispatch(store), new RemoveNotifications([this.notification]).dispatch(store)]);
+    public async call(store: StoreAPI<RootState>, complete: () => Promise<void>): Promise<void> {
+        await Promise.all([complete(), store.dispatch(new RemoveNotifications([this.notification]))]);
     }
 }
 

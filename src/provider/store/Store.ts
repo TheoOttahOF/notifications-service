@@ -1,11 +1,17 @@
+import 'reflect-metadata';
 import {Signal} from 'openfin-service-signal';
 
 import {AsyncInit} from '../controller/AsyncInit';
 import {ErrorAggregator} from '../model/Errors';
 
+import {Immutable, RootState} from './State';
+
+type StateKey<S> = keyof S;
+type StateOf<S, T extends StateKey<S>> = T extends string ? S[T] : S;
+
 export abstract class Action<S> {
-    public async dispatch(store: StoreAPI<S>): Promise<void> {
-        await store.dispatch(this);
+    public async call(store: StoreAPI<S>, complete: () => Promise<void>): Promise<void> {
+        await complete();
     }
 
     public reduce(state: S): S {
@@ -13,6 +19,20 @@ export abstract class Action<S> {
     }
 
     public abstract readonly type: string;
+}
+
+export abstract class KeyedAction<S, T extends StateKey<S>> extends Action<S> {
+    public readonly key: StateKey<S>;
+
+    constructor(key: T) {
+        super();
+        this.key = key;
+    }
+
+    // @ts-ignore Action & KeyedAction have different reduce state type param
+    public reduce(state: StateOf<S, T>): StateOf<S, T> {
+        return state;
+    }
 }
 
 export class Init<S> extends Action<S> {
@@ -39,18 +59,18 @@ export class Store<S> extends AsyncInit {
     private _currentState!: S;
     private readonly _listeners: Listener<S>[] = [];
 
-    constructor(initialState: S) {
+    constructor() {
         super();
-        // This is used by dev tools
-        new Init(initialState).dispatch(this);
     }
 
-    public get state(): S {
-        return this._currentState;
+    public get state(): Immutable<S> {
+        return this._currentState as Immutable<S>;
     }
 
-    public dispatch(action: Action<S>): Promise<void> {
-        return this.reduceAndSignal(action);
+    public dispatch = <T extends StateKey<S>>(action: Action<S> | KeyedAction<S, T>): Promise<void> => {
+        // @ts-ignore Action & KeyedAction have different reduce state type param
+        const next = () => this.reduceAndSignal(action);
+        return action.call(this, next);
     }
 
     protected async init(): Promise<void> {}
@@ -66,7 +86,12 @@ export class Store<S> extends AsyncInit {
     }
 
     private reduce(action: Action<S>): void {
-        this._currentState = action.reduce(this.state);
+        if (action instanceof KeyedAction) {
+            // @ts-ignore KeyedState
+            this._currentState = {...this._currentState, [action.key]: action.reduce(this._currentState[action.key])};
+        } else {
+            this._currentState = action.reduce(this._currentState);
+        }
         this._listeners.forEach((listener) => listener(() => this._currentState));
     }
 

@@ -24,7 +24,7 @@ export function NotificationCenterApp(props: Props) {
     const {notifications, applications, visible, storeApi, centerLocked} = props;
     const window = React.useContext(WindowContext);
     const handleClearAll = () => {
-        new RemoveNotifications(notifications).dispatch(storeApi);
+        storeApi.dispatch(new RemoveNotifications(notifications));
     };
 
     React.useEffect(() => {

@@ -42,27 +42,27 @@ describe.each([
         });
 
         test(`A toggle will ${centerVisible ? 'close' : 'open'} the Notification Center`, async () => {
-            await new ToggleCenterVisibility(source).dispatch(mockServiceStore);
+            await mockServiceStore.dispatch(new ToggleCenterVisibility(source));
 
             expect(state.centerVisible).toBe(!centerVisible);
         });
 
         test(`Two toggles will leave the Notification Center ${centerVisible ? 'open' : 'close'}`, async () => {
-            await new ToggleCenterVisibility(source).dispatch(mockServiceStore);
+            await mockServiceStore.dispatch(new ToggleCenterVisibility(source));
             await advanceTime(5);
-            await new ToggleCenterVisibility(source).dispatch(mockServiceStore);
+            await mockServiceStore.dispatch(new ToggleCenterVisibility(source));
 
             expect(state.centerVisible).toBe(centerVisible);
         });
 
         test('A toggle with visibility set to false will close the Notification Center if not already closed', async () => {
-            await new ToggleCenterVisibility(source, false).dispatch(mockServiceStore);
+            await mockServiceStore.dispatch(new ToggleCenterVisibility(source, false));
 
             expect(state.centerVisible).toBe(false);
         });
 
         test('A toggle with visibility set to true will open the Notification Center if not already opened', async () => {
-            await new ToggleCenterVisibility(source, true).dispatch(mockServiceStore);
+            await mockServiceStore.dispatch(new ToggleCenterVisibility(source, true));
 
             expect(state.centerVisible).toBe(true);
         });
@@ -77,11 +77,11 @@ describe.each([
 
 function testUnfilteredToggle(source: ToggleCenterVisibilitySource, centerVisible: boolean): void {
     test('A toggle following shortly after a blur is not ignored', async () => {
-        new BlurCenter().dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new BlurCenter());
 
         await advanceTime(10);
 
-        new ToggleCenterVisibility(source).dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new ToggleCenterVisibility(source));
 
         expect(state.centerVisible).toBe(true);
     });
@@ -89,33 +89,33 @@ function testUnfilteredToggle(source: ToggleCenterVisibilitySource, centerVisibl
 
 function testFilteredToggle(source: ToggleCenterVisibilitySource, centerVisible: boolean): void {
     test('A toggle following shortly after a blur is ignored', async () => {
-        new BlurCenter().dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new BlurCenter());
 
         await advanceTime(10);
 
-        new ToggleCenterVisibility(source).dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new ToggleCenterVisibility(source));
 
         expect(state.centerVisible).toBe(false);
     });
 
     test('A toggle following long after a blur is not ignored', async () => {
-        new BlurCenter().dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new BlurCenter());
 
         await advanceTime(1000);
 
-        new ToggleCenterVisibility(source).dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new ToggleCenterVisibility(source));
 
         expect(state.centerVisible).toBe(true);
     });
 
     test('A toggle following shortly after a paired toggle then blur is not ignored', async () => {
-        new ToggleCenterVisibility(source).dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new ToggleCenterVisibility(source));
         await advanceTime(5);
-        new BlurCenter().dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new BlurCenter());
 
         await advanceTime(5);
 
-        new ToggleCenterVisibility(source).dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new ToggleCenterVisibility(source));
 
         expect(state.centerVisible).toBe(centerVisible);
     });
@@ -123,13 +123,13 @@ function testFilteredToggle(source: ToggleCenterVisibilitySource, centerVisible:
     test('A toggle following shortly after a paired toggle of a different source then blur is not ignored', async () => {
         const otherSource = source === ToggleCenterVisibilitySource.API ? ToggleCenterVisibilitySource.TRAY : ToggleCenterVisibilitySource.API;
 
-        new ToggleCenterVisibility(otherSource).dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new ToggleCenterVisibility(otherSource));
         await advanceTime(5);
-        new BlurCenter().dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new BlurCenter());
 
         await advanceTime(5);
 
-        new ToggleCenterVisibility(source).dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new ToggleCenterVisibility(source));
 
         expect(state.centerVisible).toBe(centerVisible);
     });

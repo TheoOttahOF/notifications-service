@@ -36,27 +36,27 @@ describe.each([
     });
 
     test('When Notification Center is blurred, the Notification Center will close if not already closed', async () => {
-        await new BlurCenter().dispatch(mockServiceStore);
+        await mockServiceStore.dispatch(new BlurCenter());
 
         expect(state.centerVisible).toBe(false);
     });
 
     test('When the Notification Center is blurred shortly after being toggled, the blur will be ignored', async () => {
-        new ToggleCenterVisibility(ToggleCenterVisibilitySource.API).dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new ToggleCenterVisibility(ToggleCenterVisibilitySource.API));
         await advanceTime(10);
-        await new BlurCenter().dispatch(mockServiceStore);
+        await mockServiceStore.dispatch(new BlurCenter());
 
         expect(state.centerVisible).toBe(!centerVisible);
     });
 
     test('When the Notification Center is blurred shortly after a paired blur then toggle, the latter blur is not ignored', async () => {
-        new BlurCenter().dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new BlurCenter());
         await advanceTime(5);
-        new ToggleCenterVisibility(ToggleCenterVisibilitySource.API).dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new ToggleCenterVisibility(ToggleCenterVisibilitySource.API));
 
         await advanceTime(5);
 
-        new BlurCenter().dispatch(mockServiceStore);
+        mockServiceStore.dispatch(new BlurCenter());
 
         expect(state.centerVisible).toBe(false);
     });
